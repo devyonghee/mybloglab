@@ -1,21 +1,18 @@
-// import { createStore, applyMiddleware } from 'redux';
-// import thunk from 'redux-thunk';
-// import { createHashHistory } from 'history';
-// import { routerMiddleware } from 'connected-react-router';
-// import createRootReducer from '../reducers';
-// import type { counterStateType } from '../reducers/types';
-//
-// const history = createHashHistory();
-// const rootReducer = createRootReducer(history);
-// const router = routerMiddleware(history);
-// const enhancer = applyMiddleware(thunk, router);
-//
-// function configureStore(initialState?: counterStateType) {
-//   return createStore<*, counterStateType, *>(
-//     rootReducer,
-//     initialState,
-//     enhancer
-//   );
-// }
-//
-// export default { configureStore, history };
+import { createStore, applyMiddleware, compose, Middleware } from 'redux';
+import thunk from 'redux-thunk';
+import { createHashHistory } from 'history';
+import { routerMiddleware as createRouterMiddleware } from 'connected-react-router';
+import createRootReducer from '../features/root-reducers';
+
+const history = createHashHistory();
+const rootReducer = createRootReducer(history);
+
+const configureStore = () => {
+  const routerMiddleware: Middleware = createRouterMiddleware(history);
+  const middleware: Array<Middleware> = [routerMiddleware, thunk];
+  const enhancers = compose(applyMiddleware(...middleware));
+
+  return createStore(rootReducer, {}, enhancers);
+};
+
+export default { configureStore, history };
