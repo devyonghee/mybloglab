@@ -1,4 +1,4 @@
-package my.shiw111.mybloglab.keyword;
+package my.devyonghee.mybloglab.keyword;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;

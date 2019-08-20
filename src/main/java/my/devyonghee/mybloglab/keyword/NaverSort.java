@@ -1,4 +1,4 @@
-package my.shiw111.mybloglab.keyword;
+package my.devyonghee.mybloglab.keyword;
 
 public enum NaverSort {
     SIMILAR("sim"), DATE("date");

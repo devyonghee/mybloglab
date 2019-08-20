@@ -5,7 +5,7 @@ plugins {
 
 apply plugin: 'io.spring.dependency-management'
 
-group = 'my.shiw111'
+group = 'my.devyonghee'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
@@ -29,4 +29,5 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compile 'org.jsoup:jsoup:1.12.1'
 }
