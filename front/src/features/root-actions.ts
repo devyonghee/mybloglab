@@ -3,7 +3,7 @@ import * as authActions from './auth/actions';
 import * as keywordActions from './keyword/actions';
 
 export default {
-  routerActions,
-  authActions,
-  keywordActions
+  router: routerActions,
+  auth: authActions,
+  keyword: keywordActions
 };

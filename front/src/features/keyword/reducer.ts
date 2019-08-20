@@ -1,8 +1,9 @@
 import { BlogState, KeywordActionTypes } from './types';
-import { SEARCH } from './constants';
+import { SET_BLOG_LIST } from './constants';
+import { Blog } from '../../models/Blog';
 
 const initialState: BlogState = {
-  blogs: []
+  blogList: [] as Array<Blog>,
 };
 
 const keywordReducer = (
@@ -11,7 +12,8 @@ const keywordReducer = (
 ): BlogState => {
 
   switch (action.type) {
-    case SEARCH:
+    case SET_BLOG_LIST:
+
       return {
         ...state,
       };

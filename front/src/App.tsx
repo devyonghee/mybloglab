@@ -1,43 +1,21 @@
-import React, { Component } from 'react';
-import Routes from './router';
-import { createMuiTheme } from '@material-ui/core';
-import { blue, indigo } from '@material-ui/core/colors';
-import { ThemeProvider } from '@material-ui/styles';
+import React from 'react';
 import { configureStore, history } from './store/configure';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-
-const theme = createMuiTheme({
-  palette: {
-    secondary: {
-      main: blue[900]
-    },
-    primary: {
-      main: indigo[700]
-    }
-  },
-  typography: {
-    fontFamily: [
-      '"Lato"',
-      'sans-serif'
-    ].join(',')
-  }
-});
+import Router from './router';
+import theme from './layouts/base/theme';
+import { ThemeProvider } from '@material-ui/styles';
 
 const store = configureStore();
 
-class App extends Component {
-  render () {
-    return (
-      <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <ThemeProvider theme={theme}>
-            <Routes/>
-          </ThemeProvider>
-        </ConnectedRouter>
-      </Provider>
-    );
-  }
-}
+const App = (): React.ReactElement => (
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <ThemeProvider theme={theme}>
+          <Router/>
+        </ThemeProvider>
+      </ConnectedRouter>
+    </Provider>
+);
 
 export default App;

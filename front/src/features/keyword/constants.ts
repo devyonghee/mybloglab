@@ -1,1 +1,1 @@
-export const SEARCH = 'keyword/SEARCH';
+export const SET_BLOG_LIST = 'keyword/SET_BLOG_LIST';

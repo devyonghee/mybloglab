@@ -1,19 +1,19 @@
-import { SEARCH } from './constants';
+import { SET_BLOG_LIST } from './constants';
 import { Blog } from '../../models/Blog';
+import { Action } from 'redux';
 
 export enum Sort {
   Similar = 'similar',
   Date = 'date'
 }
 
-export interface SearchAction {
-  type: typeof SEARCH,
-  keyword: string,
-  sort: Sort
+export interface SetBlogListAction extends Action {
+  type: typeof SET_BLOG_LIST,
+  blogList: Array<Blog>,
 }
 
-export interface BlogState {
-  blogs: Blog[]
+export type BlogState = {
+  blogList: Array<Blog>
 }
 
-export type KeywordActionTypes = SearchAction;
+export type KeywordActionTypes = SetBlogListAction;

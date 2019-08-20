@@ -4,7 +4,8 @@ import { AuthActionTypes } from './types';
 const login = (id: string, password: string): AuthActionTypes => {
   return {
     type: LOGIN,
-    id, password,
+    id,
+    password,
   };
 };
 

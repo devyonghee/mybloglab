@@ -1,16 +1,17 @@
 import { LOGIN, LOGOUT } from './constants';
+import { Action } from 'redux';
 
-export interface LoginAction {
+export interface LoginAction extends Action {
   type: typeof LOGIN,
   id: string,
   password: string,
 }
 
-export interface LogoutAction {
+export interface LogoutAction extends Action {
   type: typeof LOGOUT
 }
 
-export interface AuthState {
+export type AuthState = {
   name?: String,
   token?: String,
 }

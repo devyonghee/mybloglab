@@ -1,10 +1,10 @@
-export interface Blogger {
-  name: String;
-  link: String;
+export type Blogger = {
+  name: string;
+  link?: string;
 }
 
-export interface Blog {
-  name: String;
-  link: String;
-  blogger: Blogger;
+export type Blog = {
+  name: string;
+  link?: string;
+  blogger?: Blogger;
 }
