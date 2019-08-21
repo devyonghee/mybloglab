@@ -30,9 +30,11 @@ const TablePaginationActions: React.FC<TablePaginationActionsProps> = (props: Ta
   const block: number = Math.max(0, Math.floor((page / pagePerBlock)));
 
   const pagesInBlock: Array<number> = [];
-  for (let page = Math.max((block * pagePerBlock), 0);
-       page < Math.min((block * pagePerBlock) + pagePerBlock, lastPage + 1);
-       page++) {
+  for (
+    let page = Math.max((block * pagePerBlock), 0);
+    page < Math.min((block * pagePerBlock) + pagePerBlock, lastPage + 1);
+    page++
+  ) {
     pagesInBlock.push(page);
   }
 

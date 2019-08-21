@@ -1,4 +1,4 @@
-import { SET_BLOG_LIST } from './constants';
+import { SET_BLOG } from './constants';
 import { Blog } from '../../models/Blog';
 import { Action } from 'redux';
 
@@ -8,12 +8,12 @@ export enum Sort {
 }
 
 export interface SetBlogListAction extends Action {
-  type: typeof SET_BLOG_LIST,
-  blogList: Array<Blog>,
+  type: typeof SET_BLOG,
+  blog: Blog,
 }
 
 export type BlogState = {
-  blogList: Array<Blog>
+  blog: Blog | null
 }
 
 export type KeywordActionTypes = SetBlogListAction;

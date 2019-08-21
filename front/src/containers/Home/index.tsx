@@ -7,7 +7,7 @@ import Container from './Container';
 type OwnProps = {};
 
 const mapStateToProps = (state: RootState, ownProps: OwnProps) => ({
-  blogList: state.keyword.blogList,
+  blog: state.keyword.blog,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<RootAction>, ownProps: OwnProps) => {

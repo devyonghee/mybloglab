@@ -1,1 +1,1 @@
-export const SET_BLOG_LIST = 'keyword/SET_BLOG_LIST';
+export const SET_BLOG = 'keyword/SET_BLOG';

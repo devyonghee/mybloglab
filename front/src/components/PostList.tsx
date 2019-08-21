@@ -8,14 +8,15 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePaginationActions from './TablePagenationActions';
-import { Blog } from '../models/Blog';
+import { Post } from '../models/Blog';
+import Link from '@material-ui/core/Link';
 
 type Props = {
-  blogList: Array<Blog>;
+  posts: Array<Post>;
 };
 
 const defaultProps = {
-  blogList: [] as Array<Blog>
+  posts: [] as Array<Post>
 };
 
 const useStyles = makeStyles(theme => ({
@@ -31,14 +32,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const BlogList: React.FC<Props> = (props: Props) => {
-
+const PostList: React.FC<Props> = (props: Props) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const rowsPerPageOptions = [5, 10, 20, 50];
   const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[0]);
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.blogList.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.posts.length - page * rowsPerPage);
 
   const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number): void => {
     setPage(newPage);
@@ -49,18 +49,22 @@ const BlogList: React.FC<Props> = (props: Props) => {
     setPage(0);
   };
 
+  React.useEffect(() => setPage(0), props.posts);
+
   return (
     <Paper className={classes.root}>
       <div className={classes.tableWrapper}>
         <Table className={classes.table}>
           <TableBody>
-            {props.blogList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => (
-              <TableRow key={row.name}>
+            {props.posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((post: Post) => (
+              <TableRow key={post.title}>
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {post.link ?
+                    <Link component='a' target='_blank' href={post.link.href}>{post.title}</Link>
+                    : post.title}
                 </TableCell>
-                <TableCell align="right">{row.name}</TableCell>
-                <TableCell align="right">{row.name}</TableCell>
+                <TableCell align="right">{post.title}</TableCell>
+                <TableCell align="right">{post.title}</TableCell>
               </TableRow>
             ))}
 
@@ -75,7 +79,7 @@ const BlogList: React.FC<Props> = (props: Props) => {
               <TablePagination
                 rowsPerPageOptions={rowsPerPageOptions}
                 colSpan={3}
-                count={props.blogList.length}
+                count={props.posts.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{
@@ -94,6 +98,6 @@ const BlogList: React.FC<Props> = (props: Props) => {
   );
 };
 
-BlogList.defaultProps = defaultProps;
+PostList.defaultProps = defaultProps;
 
-export default BlogList;
+export default PostList;
