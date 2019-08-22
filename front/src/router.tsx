@@ -6,17 +6,17 @@ import { history } from './store/configure';
 import Home from './containers/Home';
 
 const router: React.FC = (): React.ReactElement => (
-    <Router history={history}>
-        <ScrollToTop>
-            <Switch>
-                <Route exact path={routes.HOME} component={Home}/>
-                {/*<Route exact path='/dashboard' component={Dashboard}/>*/}
-                {/*<Route exact path='/signup' component={Signup}/>*/}
-                {/*<Route exact path='/wizard' component={Wizard}/>*/}
-                {/*<Route exact path='/cards' component={Cards}/>*/}
-            </Switch>
-        </ScrollToTop>
-    </Router>
+  <Router history={history}>
+    <ScrollToTop>
+      <Switch>
+        <Route exact path={routes.HOME} component={Home}/>
+        {/*<Route exact path='/dashboard' component={Dashboard}/>*/}
+        {/*<Route exact path='/signup' component={Signup}/>*/}
+        {/*<Route exact path='/wizard' component={Wizard}/>*/}
+        {/*<Route exact path='/cards' component={Cards}/>*/}
+      </Switch>
+    </ScrollToTop>
+  </Router>
 );
 
 export default router;

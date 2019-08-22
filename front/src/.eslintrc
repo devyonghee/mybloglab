@@ -11,6 +11,16 @@
     "react",
     "react-hooks"
   ],
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.js"
+      },
+      "node": {
+        "extensions": [".js", ".jsx", ".json", ".ts", ".tsx"]
+      }
+    }
+  },
   "rules": {
     "indent": ["error", 2, {
       "CallExpression": {"arguments": 1},

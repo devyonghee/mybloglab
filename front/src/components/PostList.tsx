@@ -7,9 +7,11 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 import TablePaginationActions from './TablePagenationActions';
-import { Post } from '../models/Blog';
+import { Post } from '@src/models/Blog';
 import Link from '@material-ui/core/Link';
+import MyTextField from '@src/components/TextField';
 
 type Props = {
   posts: Array<Post>;
@@ -32,11 +34,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const naverSearchHref = (title: string): string => {
+  const parameter = { where: 'post', query: `"${title}"` };
+  const urlSearchParams = new URLSearchParams(parameter);
+  return `https://search.naver.com/search.naver?${urlSearchParams}`;
+};
+
 const PostList: React.FC<Props> = (props: Props) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const rowsPerPageOptions = [5, 10, 20, 50];
-  const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[0]);
+  const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[1]);
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.posts.length - page * rowsPerPage);
 
@@ -49,7 +57,7 @@ const PostList: React.FC<Props> = (props: Props) => {
     setPage(0);
   };
 
-  React.useEffect(() => setPage(0), props.posts);
+  React.useEffect(() => setPage(0), [props.posts]);
 
   return (
     <Paper className={classes.root}>
@@ -59,12 +67,16 @@ const PostList: React.FC<Props> = (props: Props) => {
             {props.posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((post: Post) => (
               <TableRow key={post.title}>
                 <TableCell component="th" scope="row">
-                  {post.link ?
-                    <Link component='a' target='_blank' href={post.link.href}>{post.title}</Link>
-                    : post.title}
+                  {
+                    post.link ?
+                      <Link component='a' target='_blank' href={post.link.href}>{post.title}</Link>
+                      : post.title
+                  }
+                  <Button href={naverSearchHref(post.title)} target='_blank' size='small'>검색해보기</Button>
                 </TableCell>
-                <TableCell align="right">{post.title}</TableCell>
-                <TableCell align="right">{post.title}</TableCell>
+                <TableCell>
+                  <MyTextField/>
+                </TableCell>
               </TableRow>
             ))}
 

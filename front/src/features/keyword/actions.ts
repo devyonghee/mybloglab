@@ -1,7 +1,7 @@
 import { KeywordActionTypes, Sort } from './types';
 import { Dispatch } from 'redux';
 import { SET_BLOG } from './constants';
-import { Blog } from '../../models/Blog';
+import { Blog } from '@src/models/Blog';
 
 const setBlog = (blog: Blog): KeywordActionTypes => {
   return {

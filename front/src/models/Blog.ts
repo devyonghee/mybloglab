@@ -5,7 +5,7 @@ class Post {
   link?: URL;
   created?: Moment;
 
-  constructor (title: string, link: URL, created: Moment) {
+  constructor (title: string, link?: URL, created?: Moment) {
     this.title = title;
     this.link = link;
     this.created = created;
@@ -14,8 +14,8 @@ class Post {
   static fromJson (json: any): Post {
     return new Post(
       json.title,
-      new URL(json.link),
-      moment(json.created));
+      json.link ? new URL(json.link) : undefined,
+      json.created ? moment(json.created) : undefined);
   }
 }
 
@@ -37,7 +37,7 @@ class Blog {
       json.title,
       json.link ? new URL(json.link) : undefined,
       json.image ? new URL(json.image) : undefined,
-      ...json.posts.map(Post.fromJson).filter((post: Post) => post.link && post.created)
+      ...json.posts.filter((post: Post) => post.title).map(Post.fromJson)
     );
   }
 }

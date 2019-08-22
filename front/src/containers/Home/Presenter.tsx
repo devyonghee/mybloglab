@@ -1,11 +1,14 @@
 import React, { RefObject } from 'react';
-import Layout from '../../layouts/base/Layout';
+import Layout from '@src/layouts/base/Layout';
+import MyTextField from '@src/components/TextField';
+import PostList from '@src/components/PostList';
+import { Blog } from '@src/models/Blog';
 import useStyles from './style';
-import MyTextField from '../../components/TextField';
-import PostList from '../../components/PostList';
-import { Blog } from '../../models/Blog';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import Avatar from '@material-ui/core/Avatar';
+import { Typography } from '@material-ui/core';
+import Link from '@material-ui/core/Link';
 
 type Props = {
   blog: Blog | null
@@ -46,6 +49,22 @@ const Presenter: React.FC<Props> = (props): React.ReactElement => {
       <IconButton onClick={handleLinkSearchBtnClick} className={classes.searchButton}>
         <SearchIcon/>
       </IconButton>
+      {
+        blog &&
+        <div className={classes.blog}>
+          {blog.image && <Avatar alt={blog.title} src={blog.image.href} className={classes.avatar}/>}
+          <Typography className={classes.blogTitle}>
+            {
+              blog.link ?
+                <Link
+                  target='_blank'
+                  href={blog.link.href}
+                  component='a'>{blog.title}</Link>
+                : blog.title
+            }
+          </Typography>
+        </div>
+      }
       <PostList posts={blog ? blog.posts : []}/>
     </Layout>
   );

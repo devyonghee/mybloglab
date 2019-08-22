@@ -1,6 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 import Presenter from './Presenter';
-import { Blog } from '../../models/Blog';
+import { Blog } from '@src/models/Blog';
 
 type Props = {
   blog: Blog | null;

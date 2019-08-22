@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { RootAction, RootState } from '../../store/types';
+import { RootAction, RootState } from '@src/store/types';
 import { bindActionCreators, Dispatch } from 'redux';
-import { createActions as keywordActions } from '../../features/keyword/actions';
+import { createActions as keywordActions } from '@src/features/keyword/actions';
 import Container from './Container';
 
 type OwnProps = {};

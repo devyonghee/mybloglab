@@ -1,5 +1,5 @@
 import { SET_BLOG } from './constants';
-import { Blog } from '../../models/Blog';
+import { Blog } from '@src/models/Blog';
 import { Action } from 'redux';
 
 export enum Sort {
