@@ -2,7 +2,7 @@ import React, { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 import Presenter from './Presenter';
 import { Blog } from '@src/models/Blog';
 
-type Props = {
+interface Props {
   blog: Blog | null;
   searchKeyword: (keyword: string) => void;
 }

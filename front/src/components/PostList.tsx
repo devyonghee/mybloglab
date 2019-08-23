@@ -11,7 +11,9 @@ import Button from '@material-ui/core/Button';
 import TablePaginationActions from './TablePagenationActions';
 import { Post } from '@src/models/Blog';
 import Link from '@material-ui/core/Link';
-import MyTextField from '@src/components/TextField';
+import SearchTextFiled from '@src/components/SearchTextFiled';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 type Props = {
   posts: Array<Post>;
@@ -57,7 +59,9 @@ const PostList: React.FC<Props> = (props: Props) => {
     setPage(0);
   };
 
-  React.useEffect(() => setPage(0), [props.posts]);
+  React.useEffect(() => {
+    setPage(0);
+  }, [props.posts]);
 
   return (
     <Paper className={classes.root}>
@@ -75,7 +79,20 @@ const PostList: React.FC<Props> = (props: Props) => {
                   <Button href={naverSearchHref(post.title)} target='_blank' size='small'>검색해보기</Button>
                 </TableCell>
                 <TableCell>
-                  <MyTextField/>
+                  <SearchTextFiled
+                    onSearch={(test: string) => {console.log(test);}}
+                  />
+                </TableCell>
+                <TableCell>
+                  <Select
+                    displayEmpty
+                    name="age"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={10}>Ten</MenuItem>
+                  </Select>
                 </TableCell>
               </TableRow>
             ))}

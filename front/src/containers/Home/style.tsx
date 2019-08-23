@@ -2,14 +2,15 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   linkTextField: {
-    display: 'flex',
+    display: 'inline-flex',
     marginTop: theme.spacing(5),
-    width: '60vw'
+    width: '60vw',
+    maxWidth: '400px'
   },
 
   searchButton: {
     position: 'absolute',
-    transform: 'translate(60vw, -65px)',
+    transform: 'translateY(39px)',
     borderRadius: '10%',
     height: '57px',
     width: '57px'

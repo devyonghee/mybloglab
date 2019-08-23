@@ -10,7 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 
-type Props = {
+interface Props {
   blog: Blog | null
   link?: string
   handleLinkChange: (event: React.ChangeEvent<HTMLInputElement>) => void

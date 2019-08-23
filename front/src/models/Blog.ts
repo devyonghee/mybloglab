@@ -37,7 +37,16 @@ class Blog {
       json.title,
       json.link ? new URL(json.link) : undefined,
       json.image ? new URL(json.image) : undefined,
-      ...json.posts.filter((post: Post) => post.title).map(Post.fromJson)
+      ...json.posts.filter((post: Post) => post.title)
+        .map(Post.fromJson)
+        .sort(
+          (post1: Post, post2: Post) => {
+            if (!!post1.created && !!post2.created) return post1.created.isBefore(post2.created) ? 1 : -1;
+            if (post1.created && !post2.created) return -1;
+            if (!post1.created && post2.created) return 1;
+            return 0;
+          }
+        )
     );
   }
 }

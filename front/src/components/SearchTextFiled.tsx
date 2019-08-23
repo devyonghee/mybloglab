@@ -1,0 +1,74 @@
+import React, { ChangeEvent, KeyboardEvent, useRef } from 'react';
+import { makeStyles } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
+import MyTextField from '@src/components/TextField';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
+
+interface Props {
+  onSearch: (value: string) => void;
+}
+
+const defaultProps = {
+  onSearch: (value: string) => console.warn('no function'),
+};
+
+const useStyles = makeStyles(() => ({
+  keywordFiled: {
+    width: '150px'
+  },
+  searchButton: {
+    top: '12px',
+    color: grey[500]
+  },
+}));
+
+const SearchTextFiled: React.FC<Props> = (props: Props) => {
+  const { onSearch } = props;
+  const classes = useStyles();
+  const [value, setValue] = React.useState();
+  const ref = useRef<HTMLInputElement>(null);
+
+  const handleValueChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    event.preventDefault();
+    setValue(event.currentTarget.value);
+  };
+
+  const search = (): void => {
+    if (!value) {
+      ref.current && ref.current.focus();
+      return alert('값을 입력해주세요');
+    }
+    return onSearch(value);
+  };
+
+  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>): void => {
+    if (event.key.toLowerCase() !== 'enter') return;
+    search();
+  };
+
+  return (
+    <React.Fragment>
+      <MyTextField
+        ref={ref}
+        className={classes.keywordFiled}
+        label="키워드"
+        value={value}
+        onChange={handleValueChange}
+        inputProps={{
+          onKeyPress: handleKeyPress
+        }}
+      />
+      <IconButton
+        onClick={search}
+        className={classes.searchButton}
+        size='small'>
+        <SearchIcon/>
+      </IconButton>
+    </React.Fragment>
+  );
+};
+
+SearchTextFiled.defaultProps = defaultProps;
+
+export default SearchTextFiled;
