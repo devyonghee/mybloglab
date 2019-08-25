@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history';
 import { routerMiddleware as createRouterMiddleware } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
 import * as authActions from '../features/auth/actions';
-import * as keywordActions from '../features/keyword/actions';
+import * as blogActions from '../features/blog/actions';
 import createRootReducer from '../features/root-reducers';
 import { RootState } from './types';
 
@@ -18,7 +18,7 @@ const configureStore = (initialState?: RootState): Store => {
 
   const actionCreators = {
     ...authActions,
-    ...keywordActions,
+    ...blogActions,
   };
 
   const composeEnhancers =

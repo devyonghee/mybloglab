@@ -1,4 +1,4 @@
-package my.devyonghee.mybloglab.keyword;
+package my.devyonghee.mybloglab.blog;
 
 import lombok.Builder;
 import lombok.Getter;

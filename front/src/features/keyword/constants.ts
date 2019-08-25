@@ -1,1 +1,0 @@
-export const SET_BLOG = 'keyword/SET_BLOG';

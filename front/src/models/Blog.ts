@@ -4,6 +4,7 @@ class Post {
   title: string;
   link?: URL;
   created?: Moment;
+  rank?: number;
 
   constructor (title: string, link?: URL, created?: Moment) {
     this.title = title;

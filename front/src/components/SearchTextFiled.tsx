@@ -6,14 +6,17 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 
 interface Props {
-  onSearch: (value: string) => void;
+  onSearch: (keyword: string) => void;
 }
 
 const defaultProps = {
-  onSearch: (value: string) => console.warn('no function'),
+  onSearch: (keyword: string) => console.warn('no function'),
 };
 
 const useStyles = makeStyles(() => ({
+  root: {
+    display: 'flex'
+  },
   keywordFiled: {
     width: '150px'
   },
@@ -26,7 +29,7 @@ const useStyles = makeStyles(() => ({
 const SearchTextFiled: React.FC<Props> = (props: Props) => {
   const { onSearch } = props;
   const classes = useStyles();
-  const [value, setValue] = React.useState();
+  const [value, setValue] = React.useState('');
   const ref = useRef<HTMLInputElement>(null);
 
   const handleValueChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -48,9 +51,9 @@ const SearchTextFiled: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <React.Fragment>
+    <div className={classes.root}>
       <MyTextField
-        ref={ref}
+        inputRef={ref}
         className={classes.keywordFiled}
         label="키워드"
         value={value}
@@ -65,7 +68,7 @@ const SearchTextFiled: React.FC<Props> = (props: Props) => {
         size='small'>
         <SearchIcon/>
       </IconButton>
-    </React.Fragment>
+    </div>
   );
 };
 

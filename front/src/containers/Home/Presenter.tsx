@@ -2,7 +2,7 @@ import React, { RefObject } from 'react';
 import Layout from '@src/layouts/base/Layout';
 import MyTextField from '@src/components/TextField';
 import PostList from '@src/components/PostList';
-import { Blog } from '@src/models/Blog';
+import { Blog, Post } from '@src/models/Blog';
 import useStyles from './style';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
@@ -16,6 +16,7 @@ interface Props {
   handleLinkChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   handleLinkKeyPress: (event: React.KeyboardEvent<HTMLInputElement>) => void
   handleLinkSearchBtnClick: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleSearchPostRank: (post: Post, keyword: string) => void
   linkRef: RefObject<HTMLInputElement>
 }
 
@@ -27,7 +28,8 @@ const Presenter: React.FC<Props> = (props): React.ReactElement => {
     linkRef,
     handleLinkChange,
     handleLinkKeyPress,
-    handleLinkSearchBtnClick
+    handleLinkSearchBtnClick,
+    handleSearchPostRank
   } = props;
   return (
     <Layout>
@@ -65,7 +67,9 @@ const Presenter: React.FC<Props> = (props): React.ReactElement => {
           </Typography>
         </div>
       }
-      <PostList posts={blog ? blog.posts : []}/>
+      <PostList
+        handleSearchPostRank={handleSearchPostRank}
+        posts={blog ? blog.posts : []}/>
     </Layout>
   );
 };

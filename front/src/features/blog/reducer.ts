@@ -1,5 +1,5 @@
 import { BlogState, KeywordActionTypes } from './types';
-import { SET_BLOG } from './constants';
+import { SET_BLOG, SET_POST_RANK } from './constants';
 
 const initialState: BlogState = {
   blog: null,
@@ -16,6 +16,10 @@ const keywordReducer = (
         ...state,
         blog: action.blog,
       };
+
+    case SET_POST_RANK:
+
+      return state;
 
     default:
       return state;

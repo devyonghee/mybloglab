@@ -12,15 +12,15 @@ import TablePaginationActions from './TablePagenationActions';
 import { Post } from '@src/models/Blog';
 import Link from '@material-ui/core/Link';
 import SearchTextFiled from '@src/components/SearchTextFiled';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 
-type Props = {
-  posts: Array<Post>;
-};
+interface Props {
+  posts: Array<Post>
+  handleSearchPostRank: (post: Post, keyword: string) => void
+}
 
 const defaultProps = {
-  posts: [] as Array<Post>
+  posts: [] as Array<Post>,
+  handleSearchPostRank: (post: Post, keyword: string) => console.warn('no function'),
 };
 
 const useStyles = makeStyles(theme => ({
@@ -80,19 +80,10 @@ const PostList: React.FC<Props> = (props: Props) => {
                 </TableCell>
                 <TableCell>
                   <SearchTextFiled
-                    onSearch={(test: string) => {console.log(test);}}
+                    onSearch={(keyword: string) => props.handleSearchPostRank(post, keyword)}
                   />
                 </TableCell>
                 <TableCell>
-                  <Select
-                    displayEmpty
-                    name="age"
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                  </Select>
                 </TableCell>
               </TableRow>
             ))}
