@@ -7,11 +7,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class ApiHeaderConfig {
+public class ApiHeaderConfiguration {
 
-    @Value("${naver.id}")
+    @Value("${naver.blog.id}")
     private String naverId;
-    @Value("${naver.key}")
+    @Value("${naver.blog.key}")
     private String naverkey;
 
     @Bean

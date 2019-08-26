@@ -1,3 +1,5 @@
 naver:
-  id: wimMMqND6IS9z3VIzppq
-  key: l7B0yLlyEy
+  blog:
+    url: https://openapi.naver.com/v1/search/blog.json
+    id: wimMMqND6IS9z3VIzppq
+    key: l7B0yLlyEy
