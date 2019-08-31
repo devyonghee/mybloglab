@@ -10,16 +10,22 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => ({
   blog: state.blog.blog,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<RootAction>, ownProps: OwnProps) => {
-  return bindActionCreators({
-    searchBlog: keywordActions.searchBlog,
-    searchPostRank: keywordActions.searchPostRank,
-  }, dispatch);
+const mapDispatchToProps = (
+  dispatch: Dispatch<RootAction>,
+  ownProps: OwnProps,
+) => {
+  return bindActionCreators(
+    {
+      searchBlog: keywordActions.searchBlog,
+      searchPostRank: keywordActions.searchPostRank,
+    },
+    dispatch,
+  );
 };
 
 const Home = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Container);
 
 export default Home;

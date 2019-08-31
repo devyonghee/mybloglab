@@ -1,16 +1,16 @@
 import React, { Fragment } from 'react';
+import { render } from 'react-dom';
 import { AppContainer as ReactHotAppContainer } from 'react-hot-loader';
 import App from './App';
-import { render } from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 
 const AppContainer = process.env.PLAIN_HMR ? Fragment : ReactHotAppContainer;
 
 render(
   <AppContainer>
-    <App/>
+    <App />
   </AppContainer>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 if (module.hot) {
@@ -18,9 +18,9 @@ if (module.hot) {
     const NextApp = require('./App').default;
     render(
       <AppContainer>
-        <NextApp/>
+        <NextApp />
       </AppContainer>,
-      document.getElementById('root')
+      document.getElementById('root'),
     );
   });
 }

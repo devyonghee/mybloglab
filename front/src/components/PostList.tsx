@@ -8,19 +8,20 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import TablePaginationActions from './TablePagenationActions';
 import { Post } from '@src/models/Blog';
 import Link from '@material-ui/core/Link';
 import SearchTextFiled from '@src/components/SearchTextFiled';
+import TablePaginationActions from './TablePagenationActions';
 
 interface Props {
-  posts: Array<Post>
-  handleSearchPostRank: (post: Post, keyword: string) => void
+  posts: Array<Post>;
+  handleSearchPostRank: (post: Post, keyword: string) => void;
 }
 
 const defaultProps = {
   posts: [] as Array<Post>,
-  handleSearchPostRank: (post: Post, keyword: string) => console.warn('no function'),
+  handleSearchPostRank: (post: Post, keyword: string) =>
+    console.warn('no function'),
 };
 
 const useStyles = makeStyles(theme => ({
@@ -48,9 +49,14 @@ const PostList: React.FC<Props> = (props: Props) => {
   const rowsPerPageOptions = [5, 10, 20, 50];
   const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[1]);
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.posts.length - page * rowsPerPage);
+  const emptyRows =
+    rowsPerPage -
+    Math.min(rowsPerPage, props.posts.length - page * rowsPerPage);
 
-  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number): void => {
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number,
+  ): void => {
     setPage(newPage);
   };
 
@@ -68,29 +74,40 @@ const PostList: React.FC<Props> = (props: Props) => {
       <div className={classes.tableWrapper}>
         <Table className={classes.table}>
           <TableBody>
-            {props.posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((post: Post) => (
-              <TableRow key={post.title}>
-                <TableCell component="th" scope="row">
-                  {
-                    post.link ?
-                      <Link component='a' target='_blank' href={post.link.href}>{post.title}</Link>
-                      : post.title
-                  }
-                  <Button href={naverSearchHref(post.title)} target='_blank' size='small'>검색해보기</Button>
-                </TableCell>
-                <TableCell>
-                  <SearchTextFiled
-                    onSearch={(keyword: string) => props.handleSearchPostRank(post, keyword)}
-                  />
-                </TableCell>
-                <TableCell>
-                </TableCell>
-              </TableRow>
-            ))}
+            {props.posts
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((post: Post) => (
+                <TableRow key={post.title}>
+                  <TableCell component="th" scope="row">
+                    {post.link ? (
+                      <Link component="a" target="_blank" href={post.link.href}>
+                        {post.title}
+                      </Link>
+                    ) : (
+                      post.title
+                    )}
+                    <Button
+                      href={naverSearchHref(post.title)}
+                      target="_blank"
+                      size="small"
+                    >
+                      검색해보기
+                    </Button>
+                  </TableCell>
+                  <TableCell>
+                    <SearchTextFiled
+                      onSearch={(keyword: string) =>
+                        props.handleSearchPostRank(post, keyword)
+                      }
+                    />
+                  </TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              ))}
 
             {emptyRows > 0 && (
               <TableRow style={{ height: 48 * emptyRows }}>
-                <TableCell colSpan={6}/>
+                <TableCell colSpan={6} />
               </TableRow>
             )}
           </TableBody>

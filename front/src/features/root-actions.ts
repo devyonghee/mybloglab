@@ -5,5 +5,5 @@ import * as keywordActions from './blog/actions';
 export default {
   router: routerActions,
   auth: authActions,
-  blog: keywordActions
+  blog: keywordActions,
 };

@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
       padding: theme.spacing(6),
       paddingRight: 0,
     },
-  }
+  },
 }));
 
 const Home: React.FC = (): React.ReactElement => {
@@ -46,16 +46,22 @@ const Home: React.FC = (): React.ReactElement => {
           src="https://source.unsplash.com/user/erondu"
           alt="background"
         />
-        <div className={classes.overlay}/>
+        <div className={classes.overlay} />
         <Grid container>
           <Grid item md={6}>
             <div className={classes.mainFeaturedPostContent}>
-              <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+              <Typography
+                component="h1"
+                variant="h3"
+                color="inherit"
+                gutterBottom
+              >
                 Title of a longer featured blog post
               </Typography>
               <Typography variant="h5" color="inherit" paragraph>
-                Multiple lines of text that form the lede, informing new readers quickly and
-                efficiently about what&apos;s most interesting in this post&apos;s contents.
+                Multiple lines of text that form the lede, informing new readers
+                quickly and efficiently about what&apos;s most interesting in
+                this post&apos;s contents.
               </Typography>
               <Link variant="subtitle1" href="#">
                 Continue reading…

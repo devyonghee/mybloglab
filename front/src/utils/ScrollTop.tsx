@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { RouteProps, withRouter } from 'react-router-dom';
 
 const ScrollToTop: React.FC = ({ children }: RouteProps) => {
@@ -6,7 +6,7 @@ const ScrollToTop: React.FC = ({ children }: RouteProps) => {
     window.scrollTo(0, 0);
   });
 
-  return (<Fragment>{children}</Fragment>);
+  return <>{children}</>;
 };
 
 export default withRouter(ScrollToTop);

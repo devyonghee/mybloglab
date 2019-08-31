@@ -15,14 +15,14 @@ const defaultProps = {
 
 const useStyles = makeStyles(() => ({
   root: {
-    display: 'flex'
+    display: 'flex',
   },
   keywordFiled: {
-    width: '150px'
+    width: '150px',
   },
   searchButton: {
     top: '12px',
-    color: grey[500]
+    color: grey[500],
   },
 }));
 
@@ -59,14 +59,15 @@ const SearchTextFiled: React.FC<Props> = (props: Props) => {
         value={value}
         onChange={handleValueChange}
         inputProps={{
-          onKeyPress: handleKeyPress
+          onKeyPress: handleKeyPress,
         }}
       />
       <IconButton
         onClick={search}
         className={classes.searchButton}
-        size='small'>
-        <SearchIcon/>
+        size="small"
+      >
+        <SearchIcon />
       </IconButton>
     </div>
   );

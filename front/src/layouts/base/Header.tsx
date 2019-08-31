@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   },
   toolbarTitle: {
     flex: 1,
-  }
+  },
 }));
 
 const Header: React.FC = (): React.ReactElement => {
@@ -32,7 +32,7 @@ const Header: React.FC = (): React.ReactElement => {
         My Blog Lab
       </Typography>
       <IconButton>
-        <SearchIcon/>
+        <SearchIcon />
       </IconButton>
       <Button variant="outlined" size="small">
         Sign up

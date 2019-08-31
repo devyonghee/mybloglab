@@ -13,13 +13,17 @@ const useStyles = makeStyles(theme => ({
   toolbarLink: {
     padding: theme.spacing(1),
     flexShrink: 0,
-  }
+  },
 }));
 
 const Navigation: React.FC = (): React.ReactElement => {
   const classes = useStyles();
   return (
-    <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
+    <Toolbar
+      component="nav"
+      variant="dense"
+      className={classes.toolbarSecondary}
+    >
       {Object.entries(sections).map(([name, href]) => (
         <Link
           color="inherit"
@@ -34,7 +38,6 @@ const Navigation: React.FC = (): React.ReactElement => {
         </Link>
       ))}
     </Toolbar>
-
   );
 };
 

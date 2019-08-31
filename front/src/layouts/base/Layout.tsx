@@ -5,21 +5,20 @@ import Header from './Header';
 import Navigation from './Navigation';
 import Footer from './Footer';
 
-const Layout: React.FC =
-  ({ children }: React.PropsWithChildren<ReactNode>): React.ReactElement => (
-    <React.Fragment>
-      <CssBaseline/>
-      <Container maxWidth="lg">
-        <Header/>
-        <Navigation/>
+const Layout: React.FC = ({
+  children,
+}: React.PropsWithChildren<ReactNode>): React.ReactElement => (
+  <>
+    <CssBaseline />
+    <Container maxWidth="lg">
+      <Header />
+      <Navigation />
 
-        <main>
-          {children}
-        </main>
+      <main>{children}</main>
 
-        <Footer/>
-      </Container>
-    </React.Fragment>
-  );
+      <Footer />
+    </Container>
+  </>
+);
 
 export default Layout;

@@ -25,7 +25,10 @@ const setPostRank = (post: Post, keyword: string): KeywordActionTypes => {
 
 const searchBlog = (link: string) => {
   return async (dispatch: Dispatch<KeywordActionTypes>): Promise<void> => {
-    const response: Response = await fetch(`blog?${queryString.stringify({url:link})}`, { method: 'get' });
+    const response: Response = await fetch(
+      `blog?${queryString.stringify({ url: link })}`,
+      { method: 'get' },
+    );
     if (!response.ok) return alert(response.statusText);
     const json = await response.json();
     dispatch(setBlog(Blog.fromJson(json)));
@@ -33,10 +36,18 @@ const searchBlog = (link: string) => {
 };
 
 const searchPostRank = (post: Post, keyword: string) => {
-  return async (dispatch: Dispatch<KeywordActionTypes>, getState: () => RootState): Promise<void> => {
+  return async (
+    dispatch: Dispatch<KeywordActionTypes>,
+    getState: () => RootState,
+  ): Promise<void> => {
     const { blog } = getState();
-    if (!blog.blog || !blog.blog.link) return alert('블로그 주소가 존재하지 않습니다.');
-    const query = queryString.stringify({ keyword: keyword, sort: defaultSort, display: defaultSearchCount });
+    if (!blog.blog || !blog.blog.link)
+      return alert('블로그 주소가 존재하지 않습니다.');
+    const query = queryString.stringify({
+      keyword: keyword,
+      sort: defaultSort,
+      display: defaultSearchCount,
+    });
     const response: Response = await fetch(`blog/search?${query}`);
     console.log(response);
   };
@@ -49,5 +60,5 @@ export const createActions = {
 
 export default {
   setBlog,
-  setPostRank
+  setPostRank,
 };

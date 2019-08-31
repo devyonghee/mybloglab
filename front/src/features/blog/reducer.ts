@@ -7,9 +7,8 @@ const initialState: BlogState = {
 
 const keywordReducer = (
   state: BlogState = initialState,
-  action: KeywordActionTypes
+  action: KeywordActionTypes,
 ): BlogState => {
-
   switch (action.type) {
     case SET_BLOG:
       return {
@@ -18,7 +17,6 @@ const keywordReducer = (
       };
 
     case SET_POST_RANK:
-
       return state;
 
     default:

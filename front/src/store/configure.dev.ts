@@ -1,4 +1,10 @@
-import { applyMiddleware, compose, createStore, Middleware, Store } from 'redux';
+import {
+  applyMiddleware,
+  compose,
+  createStore,
+  Middleware,
+  Store,
+} from 'redux';
 import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 import { routerMiddleware as createRouterMiddleware } from 'connected-react-router';
@@ -24,17 +30,16 @@ const configureStore = (initialState?: RootState): Store => {
   const composeEnhancers =
     (window &&
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
-      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ actionCreators }))
-    || compose;
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ actionCreators })) ||
+    compose;
 
   const enhancers = composeEnhancers(applyMiddleware(...middleware));
 
   const store = createStore(rootReducer, initialState || {}, enhancers);
 
   if (module.hot) {
-    module.hot.accept(
-      '../features/root-reducers',
-      () => store.replaceReducer(require('../features/root-reducers').default)
+    module.hot.accept('../features/root-reducers', () =>
+      store.replaceReducer(require('../features/root-reducers').default),
     );
   }
   return store;

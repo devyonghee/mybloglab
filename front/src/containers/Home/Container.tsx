@@ -38,7 +38,9 @@ const Container: React.FC<Props> = (props: Props): React.ReactElement => {
     return searchBlogLink();
   };
 
-  const handleLinkSearchBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleLinkSearchBtnClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     event.preventDefault();
     return searchBlogLink();
   };
@@ -56,7 +58,8 @@ const Container: React.FC<Props> = (props: Props): React.ReactElement => {
       handleLinkSearchBtnClick={handleLinkSearchBtnClick}
       handleSearchPostRank={handleSearchPostRank}
       linkRef={linkRef}
-      {...props}/>
+      {...props}
+    />
   );
 };
 

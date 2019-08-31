@@ -15,6 +15,4 @@ const logout = (): AuthActionTypes => {
   };
 };
 
-export {
-  login, logout
-};
+export { login, logout };

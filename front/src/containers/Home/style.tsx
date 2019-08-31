@@ -5,7 +5,7 @@ const useStyles = makeStyles(theme => ({
     display: 'inline-flex',
     marginTop: theme.spacing(5),
     width: '60vw',
-    maxWidth: '400px'
+    maxWidth: '400px',
   },
 
   searchButton: {
@@ -13,12 +13,12 @@ const useStyles = makeStyles(theme => ({
     transform: 'translateY(39px)',
     borderRadius: '10%',
     height: '57px',
-    width: '57px'
+    width: '57px',
   },
 
   blog: {
     marginTop: theme.spacing(5),
-    marginBottom: theme.spacing(5)
+    marginBottom: theme.spacing(5),
   },
 
   avatar: {
@@ -29,9 +29,8 @@ const useStyles = makeStyles(theme => ({
 
   blogTitle: {
     position: 'absolute',
-    transform: 'translate(78px, -53px)'
-  }
-
+    transform: 'translate(78px, -53px)',
+  },
 }));
 
 export default useStyles;

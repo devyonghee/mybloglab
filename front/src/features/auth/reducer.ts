@@ -5,17 +5,15 @@ const initialState: AuthState = {};
 
 const authReducer = (
   state: AuthState = initialState,
-  action: AuthActionTypes
+  action: AuthActionTypes,
 ): AuthState => {
-
   switch (action.type) {
     case LOGIN:
       return state;
     case LOGOUT:
       return state;
-    default :
+    default:
       return state;
-
   }
 };
 
