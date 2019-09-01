@@ -263,7 +263,6 @@ module.exports = webpackEnv => {
         '@src': paths.appSrc,
       },
       plugins: [
-        new webpack.EnvironmentPlugin(['NODE_ENV']),
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
         // guards against forgotten dependencies and such.
         PnpWebpackPlugin,

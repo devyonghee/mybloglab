@@ -13,7 +13,7 @@ export interface SetPostRankAction extends Action {
   keyword: string;
 }
 
-export const enum NaverSort {
+export enum NaverSort {
   Similar = 'similar',
   Date = 'date',
 }
