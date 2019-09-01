@@ -20,8 +20,7 @@ interface Props {
 
 const defaultProps = {
   posts: [] as Array<Post>,
-  handleSearchPostRank: (post: Post, keyword: string) =>
-    console.warn('no function'),
+  handleSearchPostRank: () => console.warn('no function'),
 };
 
 const useStyles = makeStyles(theme => ({
@@ -48,10 +47,9 @@ const PostList: React.FC<Props> = (props: Props) => {
   const [page, setPage] = React.useState(0);
   const rowsPerPageOptions = [5, 10, 20, 50];
   const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[1]);
+  const { posts, handleSearchPostRank } = props;
 
-  const emptyRows =
-    rowsPerPage -
-    Math.min(rowsPerPage, props.posts.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, posts.length - page * rowsPerPage);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -67,43 +65,35 @@ const PostList: React.FC<Props> = (props: Props) => {
 
   React.useEffect(() => {
     setPage(0);
-  }, [props.posts]);
+  }, [posts]);
 
   return (
     <Paper className={classes.root}>
       <div className={classes.tableWrapper}>
         <Table className={classes.table}>
           <TableBody>
-            {props.posts
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((post: Post) => (
-                <TableRow key={post.title}>
-                  <TableCell component="th" scope="row">
-                    {post.link ? (
-                      <Link component="a" target="_blank" href={post.link.href}>
-                        {post.title}
-                      </Link>
-                    ) : (
-                      post.title
-                    )}
-                    <Button
-                      href={naverSearchHref(post.title)}
-                      target="_blank"
-                      size="small"
-                    >
-                      검색해보기
-                    </Button>
-                  </TableCell>
-                  <TableCell>
-                    <SearchTextFiled
-                      onSearch={(keyword: string) =>
-                        props.handleSearchPostRank(post, keyword)
-                      }
-                    />
-                  </TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-              ))}
+            {posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((post: Post) => (
+              <TableRow key={post.title}>
+                <TableCell component="th" scope="row">
+                  {post.link ? (
+                    <Link component="a" target="_blank" href={post.link.href}>
+                      {post.title}
+                    </Link>
+                  ) : (
+                    post.title
+                  )}
+                  <Button href={naverSearchHref(post.title)} target="_blank" size="small">
+                    검색해보기
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <SearchTextFiled
+                    onSearch={(keyword: string) => handleSearchPostRank(post, keyword)}
+                  />
+                </TableCell>
+                <TableCell />
+              </TableRow>
+            ))}
 
             {emptyRows > 0 && (
               <TableRow style={{ height: 48 * emptyRows }}>
@@ -116,7 +106,7 @@ const PostList: React.FC<Props> = (props: Props) => {
               <TablePagination
                 rowsPerPageOptions={rowsPerPageOptions}
                 colSpan={3}
-                count={props.posts.length}
+                count={posts.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{

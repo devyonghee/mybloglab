@@ -10,10 +10,10 @@ const router: React.FC = (): React.ReactElement => (
     <ScrollToTop>
       <Switch>
         <Route exact path={routes.HOME} component={Home} />
-        {/*<Route exact path='/dashboard' component={Dashboard}/>*/}
-        {/*<Route exact path='/signup' component={Signup}/>*/}
-        {/*<Route exact path='/wizard' component={Wizard}/>*/}
-        {/*<Route exact path='/cards' component={Cards}/>*/}
+        {/* <Route exact path='/dashboard' component={Dashboard}/> */}
+        {/* <Route exact path='/signup' component={Signup}/> */}
+        {/* <Route exact path='/wizard' component={Wizard}/> */}
+        {/* <Route exact path='/cards' component={Cards}/> */}
       </Switch>
     </ScrollToTop>
   </Router>

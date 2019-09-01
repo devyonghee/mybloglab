@@ -1,9 +1,13 @@
+// eslint-disable-next-line max-classes-per-file
 import moment, { Moment } from 'moment';
 
 class Post {
   title: string;
+
   link?: URL;
+
   created?: Moment;
+
   rank?: number;
 
   constructor(title: string, link?: URL, created?: Moment) {
@@ -23,8 +27,11 @@ class Post {
 
 class Blog {
   title: string;
+
   link?: URL;
+
   image?: URL;
+
   posts: Array<Post> = [] as Array<Post>;
 
   constructor(title: string, link?: URL, image?: URL, ...posts: Array<Post>) {

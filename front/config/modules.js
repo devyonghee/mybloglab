@@ -9,7 +9,7 @@ const paths = require('./paths');
  * @param {Object} options
  */
 function getAdditionalModulePaths(options = {}) {
-  const baseUrl = options.baseUrl;
+  const { baseUrl } = options;
 
   // We need to explicitly check for null and undefined (and not a falsy value) because
   // TypeScript treats an empty string as `.`.
@@ -74,7 +74,7 @@ function getModules() {
   const additionalModulePaths = getAdditionalModulePaths(options);
 
   return {
-    additionalModulePaths: additionalModulePaths,
+    additionalModulePaths,
     hasTsConfig,
   };
 }

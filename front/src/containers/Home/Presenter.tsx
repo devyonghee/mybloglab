@@ -15,14 +15,12 @@ interface Props {
   link?: string;
   handleLinkChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleLinkKeyPress: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-  handleLinkSearchBtnClick: (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => void;
+  handleLinkSearchBtnClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   handleSearchPostRank: (post: Post, keyword: string) => void;
   linkRef: RefObject<HTMLInputElement>;
 }
 
-const Presenter: React.FC<Props> = (props): React.ReactElement => {
+const Presenter: React.FC<Props> = (props: Props): React.ReactElement => {
   const classes = useStyles();
   const {
     blog,
@@ -50,20 +48,13 @@ const Presenter: React.FC<Props> = (props): React.ReactElement => {
         margin="normal"
         inputRef={linkRef}
       />
-      <IconButton
-        onClick={handleLinkSearchBtnClick}
-        className={classes.searchButton}
-      >
+      <IconButton onClick={handleLinkSearchBtnClick} className={classes.searchButton}>
         <SearchIcon />
       </IconButton>
       {blog && (
         <div className={classes.blog}>
           {blog.image && (
-            <Avatar
-              alt={blog.title}
-              src={blog.image.href}
-              className={classes.avatar}
-            />
+            <Avatar alt={blog.title} src={blog.image.href} className={classes.avatar} />
           )}
           <Typography className={classes.blogTitle}>
             {blog.link ? (
@@ -76,10 +67,7 @@ const Presenter: React.FC<Props> = (props): React.ReactElement => {
           </Typography>
         </div>
       )}
-      <PostList
-        handleSearchPostRank={handleSearchPostRank}
-        posts={blog ? blog.posts : []}
-      />
+      <PostList handleSearchPostRank={handleSearchPostRank} posts={blog ? blog.posts : []} />
     </Layout>
   );
 };

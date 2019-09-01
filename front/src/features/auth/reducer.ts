@@ -3,10 +3,7 @@ import { LOGIN, LOGOUT } from './constants';
 
 const initialState: AuthState = {};
 
-const authReducer = (
-  state: AuthState = initialState,
-  action: AuthActionTypes,
-): AuthState => {
+const authReducer = (state: AuthState = initialState, action: AuthActionTypes): AuthState => {
   switch (action.type) {
     case LOGIN:
       return state;

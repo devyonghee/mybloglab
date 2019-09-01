@@ -5,10 +5,7 @@ const initialState: BlogState = {
   blog: null,
 };
 
-const keywordReducer = (
-  state: BlogState = initialState,
-  action: KeywordActionTypes,
-): BlogState => {
+const keywordReducer = (state: BlogState = initialState, action: KeywordActionTypes): BlogState => {
   switch (action.type) {
     case SET_BLOG:
       return {

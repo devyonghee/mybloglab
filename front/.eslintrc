@@ -1,13 +1,14 @@
 {
   "env": {
-    "browser": true,
+    "node": true,
     "es6": true,
-    "jest": true
+    "jest": true,
+    "browser": true
   },
   "extends": [
+    "airbnb",
     "prettier",
     "eslint:recommended",
-    "react-app",
     "plugin:jsx-a11y/recommended"
   ],
   "plugins": [
@@ -19,24 +20,22 @@
     "@typescript-eslint"
   ],
   "parser": "@typescript-eslint/parser",
-  "settings": {
-    "import/resolver": {
-      "webpack": {
-        "config": "./config/webpack.config.js"
-      },
-      "node": {
-        "extensions": [
-          ".js",
-          ".json"
-        ]
-      }
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true
     }
+  },
+  "settings": {
+    "import/resolver": "webpack"
   },
   "rules": {
     "prettier/prettier": [
       "error"
     ],
-    "no-console": "off",
+    "no-console": 0,
+    "no-alert": 0,
     "jsx-a11y/no-autofocus": [
       2,
       {
@@ -47,7 +46,6 @@
       1,
       {
         "extensions": [
-          ".jsx",
           ".tsx"
         ]
       }
@@ -58,6 +56,11 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "import/no-dynamic-require": 0,
-    "no-unused-vars": "off"
+    "no-unused-vars": 0,
+    "@typescript-eslint/no-unused-vars": "error",
+    "global-require": 0,
+    "import/no-unresolved": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/prefer-default-export": "off"
   }
 }

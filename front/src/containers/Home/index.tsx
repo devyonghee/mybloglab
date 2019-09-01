@@ -4,16 +4,11 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { createActions as keywordActions } from '@src/features/blog/actions';
 import Container from './Container';
 
-type OwnProps = {};
-
-const mapStateToProps = (state: RootState, ownProps: OwnProps) => ({
+const mapStateToProps = (state: RootState) => ({
   blog: state.blog.blog,
 });
 
-const mapDispatchToProps = (
-  dispatch: Dispatch<RootAction>,
-  ownProps: OwnProps,
-) => {
+const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => {
   return bindActionCreators(
     {
       searchBlog: keywordActions.searchBlog,

@@ -5,9 +5,7 @@ import Header from './Header';
 import Navigation from './Navigation';
 import Footer from './Footer';
 
-const Layout: React.FC = ({
-  children,
-}: React.PropsWithChildren<ReactNode>): React.ReactElement => (
+const Layout: React.FC = ({ children }: React.PropsWithChildren<ReactNode>): React.ReactElement => (
   <>
     <CssBaseline />
     <Container maxWidth="lg">

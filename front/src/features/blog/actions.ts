@@ -1,9 +1,9 @@
-import { KeywordActionTypes, NaverSort } from './types';
 import { Dispatch } from 'redux';
-import { SET_BLOG, SET_POST_RANK } from './constants';
 import { Blog, Post } from '@src/models/Blog';
 import queryString from 'query-string';
 import { RootState } from '@src/store/types';
+import { SET_BLOG, SET_POST_RANK } from './constants';
+import { KeywordActionTypes, NaverSort } from './types';
 
 const defaultSort: NaverSort = NaverSort.Similar;
 const defaultSearchCount: number = 100;
@@ -25,11 +25,13 @@ const setPostRank = (post: Post, keyword: string): KeywordActionTypes => {
 
 const searchBlog = (link: string) => {
   return async (dispatch: Dispatch<KeywordActionTypes>): Promise<void> => {
-    const response: Response = await fetch(
-      `blog?${queryString.stringify({ url: link })}`,
-      { method: 'get' },
-    );
-    if (!response.ok) return alert(response.statusText);
+    const response: Response = await fetch(`blog?${queryString.stringify({ url: link })}`, {
+      method: 'get',
+    });
+    if (!response.ok) {
+      alert(response.statusText);
+      return;
+    }
     const json = await response.json();
     dispatch(setBlog(Blog.fromJson(json)));
   };
@@ -41,10 +43,13 @@ const searchPostRank = (post: Post, keyword: string) => {
     getState: () => RootState,
   ): Promise<void> => {
     const { blog } = getState();
-    if (!blog.blog || !blog.blog.link)
-      return alert('블로그 주소가 존재하지 않습니다.');
+    if (!blog.blog || !blog.blog.link) {
+      alert('블로그 주소가 존재하지 않습니다.');
+      return;
+    }
+
     const query = queryString.stringify({
-      keyword: keyword,
+      keyword,
       sort: defaultSort,
       display: defaultSearchCount,
     });

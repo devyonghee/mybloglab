@@ -50,20 +50,14 @@ const Home: React.FC = (): React.ReactElement => {
         <Grid container>
           <Grid item md={6}>
             <div className={classes.mainFeaturedPostContent}>
-              <Typography
-                component="h1"
-                variant="h3"
-                color="inherit"
-                gutterBottom
-              >
+              <Typography component="h1" variant="h3" color="inherit" gutterBottom>
                 Title of a longer featured blog post
               </Typography>
               <Typography variant="h5" color="inherit" paragraph>
-                Multiple lines of text that form the lede, informing new readers
-                quickly and efficiently about what&apos;s most interesting in
-                this post&apos;s contents.
+                Multiple lines of text that form the lede, informing new readers quickly and
+                efficiently about what&apos;s most interesting in this post&apos;s contents.
               </Typography>
-              <Link variant="subtitle1" href="#">
+              <Link target="_blank" variant="subtitle1" component="a" href="/">
                 Continue reading…
               </Link>
             </div>

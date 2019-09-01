@@ -10,7 +10,7 @@ interface Props {
 }
 
 const defaultProps = {
-  onSearch: (keyword: string) => console.warn('no function'),
+  onSearch: () => console.warn('no function'),
 };
 
 const useStyles = makeStyles(() => ({
@@ -39,10 +39,11 @@ const SearchTextFiled: React.FC<Props> = (props: Props) => {
 
   const search = (): void => {
     if (!value) {
-      ref.current && ref.current.focus();
-      return alert('값을 입력해주세요');
+      if (ref.current) ref.current.focus();
+      alert('값을 입력해주세요');
+      return;
     }
-    return onSearch(value);
+    onSearch(value);
   };
 
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>): void => {
@@ -62,11 +63,7 @@ const SearchTextFiled: React.FC<Props> = (props: Props) => {
           onKeyPress: handleKeyPress,
         }}
       />
-      <IconButton
-        onClick={search}
-        className={classes.searchButton}
-        size="small"
-      >
+      <IconButton onClick={search} className={classes.searchButton} size="small">
         <SearchIcon />
       </IconButton>
     </div>

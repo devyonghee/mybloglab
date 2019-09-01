@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { ThemeProvider } from '@material-ui/styles';
-import { configureStore, history } from './store/configure';
+import { configureStore, history } from '@src/store/configure';
 import Router from './router';
 import theme from './layouts/base/theme';
 

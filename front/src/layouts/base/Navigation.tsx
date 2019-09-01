@@ -1,9 +1,9 @@
 import React from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles } from '@material-ui/core';
-import sections from '../../constatnts/routes.json';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
+import sections from '@src/constatnts/routes.json';
 
 const useStyles = makeStyles(theme => ({
   toolbarSecondary: {
@@ -19,11 +19,7 @@ const useStyles = makeStyles(theme => ({
 const Navigation: React.FC = (): React.ReactElement => {
   const classes = useStyles();
   return (
-    <Toolbar
-      component="nav"
-      variant="dense"
-      className={classes.toolbarSecondary}
-    >
+    <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
       {Object.entries(sections).map(([name, href]) => (
         <Link
           color="inherit"

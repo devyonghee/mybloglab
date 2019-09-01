@@ -13,11 +13,12 @@ function ensureSlash(inputPath, needsSlash) {
   const hasSlash = inputPath.endsWith('/');
   if (hasSlash && !needsSlash) {
     return inputPath.substr(0, inputPath.length - 1);
-  } else if (!hasSlash && needsSlash) {
-    return `${inputPath}/`;
-  } else {
-    return inputPath;
   }
+
+  if (!hasSlash && needsSlash) {
+    return `${inputPath}/`;
+  }
+  return inputPath;
 }
 
 const getPublicUrl = appPackageJson => envPublicUrl || require(appPackageJson).homepage;
@@ -50,12 +51,12 @@ const moduleFileExtensions = [
 
 // Resolve file paths in the same order as webpack
 const resolveModule = (resolveFn, filePath) => {
-  const extension = moduleFileExtensions.find(extension =>
+  const fineExtension = moduleFileExtensions.find(extension =>
     fs.existsSync(resolveFn(`${filePath}.${extension}`)),
   );
 
-  if (extension) {
-    return resolveFn(`${filePath}.${extension}`);
+  if (fineExtension) {
+    return resolveFn(`${filePath}.${fineExtension}`);
   }
 
   return resolveFn(`${filePath}.js`);

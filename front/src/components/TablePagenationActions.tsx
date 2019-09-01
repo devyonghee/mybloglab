@@ -33,20 +33,18 @@ const TablePaginationActions: React.FC<TablePaginationActionsProps> = (
 
   const pagesInBlock: Array<number> = [];
   for (
-    let page = Math.max(block * pagePerBlock, 0);
-    page < Math.min(block * pagePerBlock + pagePerBlock, lastPage + 1);
-    page++
+    let viewPage = Math.max(block * pagePerBlock, 0);
+    viewPage < Math.min(block * pagePerBlock + pagePerBlock, lastPage + 1);
+    viewPage += 1
   ) {
-    pagesInBlock.push(page);
+    pagesInBlock.push(viewPage);
   }
 
   return (
     <div className={classes.root}>
       <IconButton
         size="small"
-        onClick={(event: MouseEvent<HTMLButtonElement>): void =>
-          onChangePage(event, 0)
-        }
+        onClick={(event: MouseEvent<HTMLButtonElement>): void => onChangePage(event, 0)}
         disabled={page === 0}
         aria-label="first page"
       >
@@ -75,9 +73,7 @@ const TablePaginationActions: React.FC<TablePaginationActionsProps> = (
 
       {pagesInBlock.map((targetPage: number) => (
         <IconButton
-          onClick={(event: MouseEvent<HTMLButtonElement>): void =>
-            onChangePage(event, targetPage)
-          }
+          onClick={(event: MouseEvent<HTMLButtonElement>): void => onChangePage(event, targetPage)}
           disabled={targetPage === page}
           aria-label="previous page"
           size="small"
