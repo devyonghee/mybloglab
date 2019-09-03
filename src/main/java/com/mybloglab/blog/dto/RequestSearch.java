@@ -1,8 +1,8 @@
-package my.devyonghee.mybloglab.blog.dto;
+package com.mybloglab.blog.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import my.devyonghee.mybloglab.blog.NaverSort;
+import com.mybloglab.blog.NaverSort;
 
 @Setter
 @Getter

@@ -1,4 +1,6 @@
-package my.devyonghee.mybloglab.blog;
+package com.mybloglab.blog;
+
+import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum NaverSort {
 
@@ -12,6 +14,7 @@ public enum NaverSort {
     }
 
     @Override
+    @JsonValue
     public String toString() {
         return this.name;
     }

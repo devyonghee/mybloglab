@@ -1,4 +1,4 @@
-package my.devyonghee.mybloglab.blog;
+package com.mybloglab.blog;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
