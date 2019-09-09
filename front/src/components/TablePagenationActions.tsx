@@ -63,7 +63,7 @@ const TablePaginationActions: React.FC<TablePaginationActionsProps> = (
       <IconButton
         size="small"
         onClick={(event: MouseEvent<HTMLButtonElement>): void => {
-          onChangePage(event, page + 1);
+          onChangePage(event, page - 1);
         }}
         disabled={page === 0}
         aria-label="previous page"

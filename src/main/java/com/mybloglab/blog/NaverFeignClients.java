@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "naver-api",
         url = "${naver-api.url}",
-        configuration = NaverFeignConfiguration.class,
-        fallbackFactory = NaverApiFallbackFactory.class)
+        configuration = NaverFeignConfiguration.class
+)
 public interface NaverFeignClients {
 
     @GetMapping("/search/blog.json?query={query}&display={display}")

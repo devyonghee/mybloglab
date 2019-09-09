@@ -10,6 +10,8 @@ class Post {
 
   rank?: number;
 
+  isExist?: boolean;
+
   constructor(title: string, link?: URL, created?: Moment) {
     this.title = title;
     this.link = link;

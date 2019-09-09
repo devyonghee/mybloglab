@@ -6,6 +6,7 @@ interface Props {
   blog: Blog | null;
   searchBlog: (link: string) => void;
   searchPostRank: (post: Post, keyword: string) => void;
+  checkPostExistence: (post: Post) => void;
 }
 
 const defaultProps = {
@@ -18,7 +19,7 @@ const Container: React.FC<Props> = (props: Props): React.ReactElement => {
   const [link, setLink] = useState('https://blog.naver.com/smileric');
   const linkRef = useRef<HTMLInputElement>(null);
 
-  const { blog, searchBlog, searchPostRank } = props;
+  const { blog, searchBlog, checkPostExistence, searchPostRank } = props;
 
   const handleLinkChange = (event: ChangeEvent<HTMLInputElement>): void => {
     event.preventDefault();
@@ -51,6 +52,13 @@ const Container: React.FC<Props> = (props: Props): React.ReactElement => {
     searchPostRank(post, keyword);
   };
 
+  const handleOnloadPost = (post: Post) => {
+    if (!post) {
+      return;
+    }
+    checkPostExistence(post);
+  };
+
   return (
     <Presenter
       blog={blog}
@@ -59,6 +67,7 @@ const Container: React.FC<Props> = (props: Props): React.ReactElement => {
       handleLinkKeyPress={handleLinkKeyPress}
       handleLinkSearchBtnClick={handleLinkSearchBtnClick}
       handleSearchPostRank={handleSearchPostRank}
+      handleOnloadPost={handleOnloadPost}
       linkRef={linkRef}
     />
   );

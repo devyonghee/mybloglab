@@ -11,16 +11,21 @@ import Button from '@material-ui/core/Button';
 import { Post } from '@src/models/Blog';
 import Link from '@material-ui/core/Link';
 import SearchTextFiled from '@src/components/SearchTextFiled';
+import ExistIcon from '@src/components/ExistIcon';
 import TablePaginationActions from './TablePagenationActions';
 
 interface Props {
+  blogger: string;
   posts: Array<Post>;
   handleSearchPostRank: (post: Post, keyword: string) => void;
+  handleOnload: (post: Post) => void;
 }
 
 const defaultProps = {
+  blogger: '',
   posts: [] as Array<Post>,
   handleSearchPostRank: () => console.warn('no function'),
+  handleOnload: () => console.warn('no function'),
 };
 
 const useStyles = makeStyles(theme => ({
@@ -46,8 +51,8 @@ const PostList: React.FC<Props> = (props: Props) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const rowsPerPageOptions = [5, 10, 20, 50];
-  const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[1]);
-  const { posts, handleSearchPostRank } = props;
+  const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[0]);
+  const { posts, blogger, handleSearchPostRank, handleOnload } = props;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, posts.length - page * rowsPerPage);
 
@@ -65,7 +70,7 @@ const PostList: React.FC<Props> = (props: Props) => {
 
   React.useEffect(() => {
     setPage(0);
-  }, [posts]);
+  }, [blogger]);
 
   return (
     <Paper className={classes.root}>
@@ -85,6 +90,9 @@ const PostList: React.FC<Props> = (props: Props) => {
                   <Button href={naverSearchHref(post.title)} target="_blank" size="small">
                     검색해보기
                   </Button>
+                </TableCell>
+                <TableCell>
+                  <ExistIcon isExist={post.isExist} actionWhenEmpty={() => handleOnload(post)} />
                 </TableCell>
                 <TableCell>
                   <SearchTextFiled

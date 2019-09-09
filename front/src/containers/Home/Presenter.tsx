@@ -17,6 +17,7 @@ interface Props {
   handleLinkKeyPress: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   handleLinkSearchBtnClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   handleSearchPostRank: (post: Post, keyword: string) => void;
+  handleOnloadPost: (post: Post) => void;
   linkRef: RefObject<HTMLInputElement>;
 }
 
@@ -30,6 +31,7 @@ const Presenter: React.FC<Props> = (props: Props): React.ReactElement => {
     handleLinkKeyPress,
     handleLinkSearchBtnClick,
     handleSearchPostRank,
+    handleOnloadPost,
   } = props;
   return (
     <Layout>
@@ -67,7 +69,12 @@ const Presenter: React.FC<Props> = (props: Props): React.ReactElement => {
           </Typography>
         </div>
       )}
-      <PostList handleSearchPostRank={handleSearchPostRank} posts={blog ? blog.posts : []} />
+      <PostList
+        handleSearchPostRank={handleSearchPostRank}
+        handleOnload={handleOnloadPost}
+        blogger={blog && blog.link ? blog.link.href : ''}
+        posts={blog ? blog.posts : []}
+      />
     </Layout>
   );
 };
