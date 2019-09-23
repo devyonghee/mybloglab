@@ -12,6 +12,7 @@ import { Post } from '@src/models/Blog';
 import Link from '@material-ui/core/Link';
 import SearchTextFiled from '@src/components/SearchTextFiled';
 import ExistIcon from '@src/components/ExistIcon';
+import { Typography } from '@material-ui/core';
 import TablePaginationActions from './TablePagenationActions';
 
 interface Props {
@@ -99,7 +100,9 @@ const PostList: React.FC<Props> = (props: Props) => {
                     onSearch={(keyword: string) => handleSearchPostRank(post, keyword)}
                   />
                 </TableCell>
-                <TableCell />
+                <TableCell>
+                  {post.rank && <Typography variant="h6">{post.rank}</Typography>}
+                </TableCell>
               </TableRow>
             ))}
 

@@ -40,7 +40,7 @@ const SearchTextFiled: React.FC<Props> = (props: Props) => {
   const search = (): void => {
     if (!value) {
       if (ref.current) ref.current.focus();
-      alert('값을 입력해주세요');
+      alert('키워드를 입력해주세요');
       return;
     }
     onSearch(value);

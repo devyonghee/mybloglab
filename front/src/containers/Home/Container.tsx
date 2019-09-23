@@ -6,7 +6,7 @@ interface Props {
   blog: Blog | null;
   searchBlog: (link: string) => void;
   searchPostRank: (post: Post, keyword: string) => void;
-  checkPostExistence: (post: Post) => void;
+  checkPostExistence: (post: Post, keyword: string) => void;
 }
 
 const defaultProps = {
@@ -41,7 +41,7 @@ const Container: React.FC<Props> = (props: Props): React.ReactElement => {
 
   const handleLinkSearchBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    return searchBlogLink();
+    searchBlogLink();
   };
 
   const handleSearchPostRank = (post: Post, keyword: string) => {
@@ -56,7 +56,7 @@ const Container: React.FC<Props> = (props: Props): React.ReactElement => {
     if (!post) {
       return;
     }
-    checkPostExistence(post);
+    checkPostExistence(post, `"${post.title}"`);
   };
 
   return (

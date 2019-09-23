@@ -1,20 +1,22 @@
 import { applyMiddleware, compose, createStore, Middleware, Store } from 'redux';
-import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import { createBrowserHistory } from 'history';
 import { routerMiddleware as createRouterMiddleware } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
-import * as authActions from '../features/auth/actions';
-import * as blogActions from '../features/blog/actions';
-import createRootReducer from '../features/root-reducers';
-import { RootState } from './types';
+import * as authActions from '@src/features/auth/actions';
+import * as blogActions from '@src/features/blog/actions';
+import createRootReducer from '@src/features/root-reducers';
+import rootSaga from '@src/features/root-saga';
+import { RootState } from '@src/store/types';
 
 const history = createBrowserHistory();
 const rootReducer = createRootReducer(history);
+const sagaMiddleware = createSagaMiddleware();
 
 const configureStore = (initialState?: RootState): Store => {
   const routerMiddleware: Middleware = createRouterMiddleware(history);
   const logger: Middleware = createLogger({ level: 'info', collapsed: true });
-  const middleware: Array<Middleware> = [routerMiddleware, thunk, logger];
+  const middleware: Array<Middleware> = [routerMiddleware, sagaMiddleware, logger];
 
   const actionCreators = {
     ...authActions,
@@ -36,6 +38,8 @@ const configureStore = (initialState?: RootState): Store => {
       store.replaceReducer(require('../features/root-reducers').default),
     );
   }
+
+  sagaMiddleware.run(rootSaga);
   return store;
 };
 

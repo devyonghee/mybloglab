@@ -1,9 +1,8 @@
-import { routerActions } from 'connected-react-router';
-import * as authActions from './auth/actions';
-import * as keywordActions from './blog/actions';
+import { Action } from 'redux';
 
-export default {
-  router: routerActions,
-  auth: authActions,
-  blog: keywordActions,
-};
+type TypeConstant = string;
+
+export interface AppAction<T extends TypeConstant, P> extends Action<T> {
+  type: T;
+  payload: P;
+}

@@ -1,4 +1,4 @@
-import { BlogActionTypes, BlogState, SetPostExistenceAction } from './types';
+import { BlogActionTypes, BlogState, SetPostExistenceAction, SetPostRankAction } from './types';
 import { SET_BLOG, SET_POST_EXISTENCE, SET_POST_RANK } from './constants';
 
 const initialState: BlogState = {
@@ -9,9 +9,26 @@ const setPostExistence = (state: BlogState, action: SetPostExistenceAction) => {
   const { blog } = state;
   if (!blog) return state;
 
-  const findPost = blog.posts.find(post => post === action.post);
+  const findPost = blog.posts.find(post => post === action.payload.post);
   if (!findPost) return state;
-  findPost.isExist = action.isExist;
+  findPost.isExist = Boolean(action.payload.isExist);
+
+  return {
+    ...state,
+    blog: {
+      ...blog,
+      posts: [...blog.posts],
+    },
+  };
+};
+
+const setPostRank = (state: BlogState, action: SetPostRankAction) => {
+  const { blog } = state;
+  if (!blog) return state;
+
+  const findPost = blog.posts.find(post => post === action.payload.post);
+  if (!findPost) return state;
+  findPost.rank = Number(action.payload.rank);
 
   return {
     ...state,
@@ -27,13 +44,14 @@ const keywordReducer = (state: BlogState = initialState, action: BlogActionTypes
     case SET_BLOG:
       return {
         ...state,
-        blog: action.blog,
+        blog: action.payload,
       };
 
     case SET_POST_EXISTENCE:
       return setPostExistence(state, action);
+
     case SET_POST_RANK:
-      return state;
+      return setPostRank(state, action);
 
     default:
       return state;
