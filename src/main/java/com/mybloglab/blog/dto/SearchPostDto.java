@@ -1,10 +1,9 @@
 package com.mybloglab.blog.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import lombok.Setter;
 
+import java.net.URI;
 import java.time.LocalDate;
 
 @Getter
@@ -21,6 +20,10 @@ public class SearchPostDto {
 
     @JsonProperty("postdate")
     private LocalDate postDate;
+
+    public boolean isEqualToLink(URI url) {
+        return this.bloggerLink.contains(url.getSchemeSpecificPart());
+    }
 }
 
 

@@ -2,8 +2,10 @@ package com.mybloglab.blog.dto;
 
 import lombok.Getter;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 public class NaverSearchDto {
@@ -13,9 +15,14 @@ public class NaverSearchDto {
 //    )
 //    private LocalDateTime lastBuildDate;
 
-    public Integer total;
-    public Integer start;
-    public Integer display;
+    private Integer total;
+    private Integer start;
+    private Integer display;
 
-    public List<SearchPostDto> items = new ArrayList<>();
+    private List<SearchPostDto> items = new ArrayList<>();
+
+    public Optional<Integer> findItemIndexByURI(URI url) {
+        Optional<SearchPostDto> first = this.items.stream().filter(item -> item.isEqualToLink(url)).findFirst();
+        return first.map(searchPostDto -> this.items.indexOf(searchPostDto));
+    }
 }
