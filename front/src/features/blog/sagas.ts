@@ -1,6 +1,6 @@
 import { Blog } from '@src/models/Blog';
 import axios, { AxiosResponse } from 'axios';
-import { put, select, takeEvery } from 'redux-saga/effects';
+import { delay, put, select, takeEvery } from 'redux-saga/effects';
 import {
   BlogState,
   CheckPostExistenceAction,
@@ -9,7 +9,7 @@ import {
   SearchPostRankAction,
 } from '@src/features/blog/types';
 import { CHECK_POST_EXISTENCE, SEARCH_BLOG, SEARCH_POST_RANK } from './constants';
-import { setBlog, setPostExistence, setPostRank } from './actions';
+import { setBlog, setPostProperty } from './actions';
 
 const defaultSort: NaverSort = NaverSort.SIMILAR;
 const defaultSearchCount: number = 100;
@@ -44,26 +44,47 @@ const fetchSearchPost = (blog: Blog | null, keyword: string): Promise<AxiosRespo
 };
 
 function* checkPostExistence(action: CheckPostExistenceAction) {
+  yield put(setPostProperty(action.payload.post, 'isExist', { loading: true }));
+
   try {
     const blog: BlogState = yield select(store => store.blog);
     const response = yield fetchSearchPost(blog.blog, action.payload.keyword);
     yield put(
-      setPostExistence(action.payload.post, response.status === 200 ? !!response.data : false),
+      setPostProperty(action.payload.post, 'isExist', {
+        loading: false,
+        value: response.status === 200 ? !!response.data : false,
+      }),
     );
   } catch (error) {
-    yield put(setPostExistence(action.payload.post, false));
+    yield put(
+      setPostProperty(action.payload.post, 'isExist', {
+        loading: false,
+        value: false,
+      }),
+    );
   }
 }
 
 function* searchPostRank(action: SearchPostRankAction) {
+  yield put(setPostProperty(action.payload.post, 'rank', { loading: true }));
+
   try {
     const blog: BlogState = yield select(store => store.blog);
     const response = yield fetchSearchPost(blog.blog, action.payload.keyword);
+    yield delay(3000);
     yield put(
-      setPostRank(action.payload.post, response.status === 200 ? Number(response.data) : Number(0)),
+      setPostProperty(action.payload.post, 'rank', {
+        loading: false,
+        value: response.status === 200 ? Number(response.data) : Number(0),
+      }),
     );
   } catch (error) {
-    yield put(setPostRank(action.payload.post, 0));
+    yield put(
+      setPostProperty(action.payload.post, 'rank', {
+        loading: false,
+        value: false,
+      }),
+    );
   }
 }
 

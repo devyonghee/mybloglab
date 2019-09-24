@@ -7,26 +7,22 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 import { Post } from '@src/models/Blog';
-import Link from '@material-ui/core/Link';
-import SearchTextFiled from '@src/components/SearchTextFiled';
-import ExistIcon from '@src/components/ExistIcon';
-import { Typography } from '@material-ui/core';
+import PostRow from './PostRow';
 import TablePaginationActions from './TablePagenationActions';
 
 interface Props {
   blogger: string;
   posts: Array<Post>;
   handleSearchPostRank: (post: Post, keyword: string) => void;
-  handleOnload: (post: Post) => void;
+  handleCheckExistence: (post: Post) => void;
 }
 
 const defaultProps = {
   blogger: '',
   posts: [] as Array<Post>,
   handleSearchPostRank: () => console.warn('no function'),
-  handleOnload: () => console.warn('no function'),
+  checkExistence: () => console.warn('no function'),
 };
 
 const useStyles = makeStyles(theme => ({
@@ -42,18 +38,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const naverSearchHref = (title: string): string => {
-  const parameter = { where: 'post', query: `"${title}"` };
-  const urlSearchParams = new URLSearchParams(parameter);
-  return `https://search.naver.com/search.naver?${urlSearchParams}`;
-};
-
 const PostList: React.FC<Props> = (props: Props) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const rowsPerPageOptions = [5, 10, 20, 50];
   const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[0]);
-  const { posts, blogger, handleSearchPostRank, handleOnload } = props;
+  const { posts, blogger, handleSearchPostRank, handleCheckExistence } = props;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, posts.length - page * rowsPerPage);
 
@@ -79,31 +69,12 @@ const PostList: React.FC<Props> = (props: Props) => {
         <Table className={classes.table}>
           <TableBody>
             {posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((post: Post) => (
-              <TableRow key={post.title}>
-                <TableCell component="th" scope="row">
-                  {post.link ? (
-                    <Link component="a" target="_blank" href={post.link.href}>
-                      {post.title}
-                    </Link>
-                  ) : (
-                    post.title
-                  )}
-                  <Button href={naverSearchHref(post.title)} target="_blank" size="small">
-                    검색해보기
-                  </Button>
-                </TableCell>
-                <TableCell>
-                  <ExistIcon isExist={post.isExist} actionWhenEmpty={() => handleOnload(post)} />
-                </TableCell>
-                <TableCell>
-                  <SearchTextFiled
-                    onSearch={(keyword: string) => handleSearchPostRank(post, keyword)}
-                  />
-                </TableCell>
-                <TableCell>
-                  {post.rank && <Typography variant="h6">{post.rank}</Typography>}
-                </TableCell>
-              </TableRow>
+              <PostRow
+                key={post.title}
+                post={post}
+                checkExistence={() => handleCheckExistence(post)}
+                handleSearchPostRank={keyword => handleSearchPostRank(post, keyword)}
+              />
             ))}
 
             {emptyRows > 0 && (

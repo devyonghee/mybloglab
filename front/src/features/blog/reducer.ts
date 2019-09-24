@@ -1,40 +1,26 @@
-import { BlogActionTypes, BlogState, SetPostExistenceAction, SetPostRankAction } from './types';
-import { SET_BLOG, SET_POST_EXISTENCE, SET_POST_RANK } from './constants';
+import { BlogActionTypes, BlogState, SetPostPropertyAction } from './types';
+import { SET_BLOG, SET_POST_PROPERTY } from './constants';
 
 const initialState: BlogState = {
   blog: null,
 };
 
-const setPostExistence = (state: BlogState, action: SetPostExistenceAction) => {
+const setPostProperty = (state: BlogState, action: SetPostPropertyAction) => {
   const { blog } = state;
   if (!blog) return state;
 
-  const findPost = blog.posts.find(post => post === action.payload.post);
-  if (!findPost) return state;
-  findPost.isExist = Boolean(action.payload.isExist);
+  const findIndex = blog.posts.findIndex(post => post === action.payload.post);
+  if (!findIndex) return state;
 
   return {
     ...state,
     blog: {
       ...blog,
-      posts: [...blog.posts],
-    },
-  };
-};
-
-const setPostRank = (state: BlogState, action: SetPostRankAction) => {
-  const { blog } = state;
-  if (!blog) return state;
-
-  const findPost = blog.posts.find(post => post === action.payload.post);
-  if (!findPost) return state;
-  findPost.rank = Number(action.payload.rank);
-
-  return {
-    ...state,
-    blog: {
-      ...blog,
-      posts: [...blog.posts],
+      posts: [
+        ...blog.posts.slice(0, findIndex),
+        { ...blog.posts[findIndex], [action.payload.id]: action.payload.value },
+        ...blog.posts.slice(findIndex + 1),
+      ],
     },
   };
 };
@@ -47,11 +33,8 @@ const keywordReducer = (state: BlogState = initialState, action: BlogActionTypes
         blog: action.payload,
       };
 
-    case SET_POST_EXISTENCE:
-      return setPostExistence(state, action);
-
-    case SET_POST_RANK:
-      return setPostRank(state, action);
+    case SET_POST_PROPERTY:
+      return setPostProperty(state, action);
 
     default:
       return state;

@@ -5,17 +5,13 @@ import {
   SEARCH_BLOG,
   SEARCH_POST_RANK,
   SET_BLOG,
-  SET_POST_EXISTENCE,
-  SET_POST_RANK,
+  SET_POST_PROPERTY,
 } from './constants';
-
-export interface SetPostRankAction
-  extends AppAction<typeof SET_POST_RANK, { post: Post; rank: Number }> {}
 
 export interface SetBlogAction extends AppAction<typeof SET_BLOG, Blog> {}
 
-export interface SetPostExistenceAction
-  extends AppAction<typeof SET_POST_EXISTENCE, { post: Post; isExist: Boolean }> {}
+export interface SetPostPropertyAction
+  extends AppAction<typeof SET_POST_PROPERTY, { post: Post; id: keyof Post; value: any }> {}
 
 export interface SearchBlogAction extends AppAction<typeof SEARCH_BLOG, string> {}
 
@@ -37,8 +33,7 @@ export enum SearchType {
 
 export type BlogActionTypes =
   | SetBlogAction
-  | SetPostRankAction
-  | SetPostExistenceAction
+  | SetPostPropertyAction
   | SearchBlogAction
   | CheckPostExistenceAction
   | SearchPostRankAction;

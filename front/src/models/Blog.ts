@@ -1,19 +1,32 @@
 // eslint-disable-next-line max-classes-per-file
 import moment, { Moment } from 'moment';
 
+export interface RemoteProps<T> {
+  loading: Boolean;
+  value?: T;
+}
+
 class Post {
   title: string;
+
+  rank: RemoteProps<Number>;
+
+  isExist: RemoteProps<Boolean>;
 
   link?: URL;
 
   created?: Moment;
 
-  rank?: number;
-
-  isExist?: boolean;
-
-  constructor(title: string, link?: URL, created?: Moment) {
+  constructor(
+    title: string,
+    rank: RemoteProps<Number>,
+    isExist: RemoteProps<Boolean>,
+    link?: URL,
+    created?: Moment,
+  ) {
     this.title = title;
+    this.rank = rank;
+    this.isExist = isExist;
     this.link = link;
     this.created = created;
   }
@@ -21,6 +34,8 @@ class Post {
   static fromJson(json: any): Post {
     return new Post(
       json.title,
+      { loading: false, value: undefined },
+      { loading: false, value: undefined },
       json.link ? new URL(json.link) : undefined,
       json.created ? moment(json.created) : undefined,
     );

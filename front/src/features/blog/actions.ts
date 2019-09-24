@@ -5,20 +5,14 @@ import {
   SEARCH_BLOG,
   SEARCH_POST_RANK,
   SET_BLOG,
-  SET_POST_EXISTENCE,
-  SET_POST_RANK,
+  SET_POST_PROPERTY,
 } from './constants';
 
 const setBlog = (blog: Blog): BlogActionTypes => ({ type: SET_BLOG, payload: blog });
 
-const setPostRank = (post: Post, rank: Number): BlogActionTypes => ({
-  type: SET_POST_RANK,
-  payload: { post, rank },
-});
-
-const setPostExistence = (post: Post, isExist: Boolean): BlogActionTypes => ({
-  type: SET_POST_EXISTENCE,
-  payload: { post, isExist },
+const setPostProperty = (post: Post, id: keyof Post, value: any): BlogActionTypes => ({
+  type: SET_POST_PROPERTY,
+  payload: { post, id, value },
 });
 
 const searchBlog = (link: string): BlogActionTypes => ({
@@ -36,4 +30,4 @@ const checkPostExistence = (post: Post, keyword: string): BlogActionTypes => ({
   payload: { post, keyword },
 });
 
-export { setBlog, setPostRank, setPostExistence, checkPostExistence, searchPostRank, searchBlog };
+export { setBlog, setPostProperty, checkPostExistence, searchPostRank, searchBlog };

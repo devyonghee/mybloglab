@@ -52,7 +52,7 @@ const Container: React.FC<Props> = (props: Props): React.ReactElement => {
     searchPostRank(post, keyword);
   };
 
-  const handleOnloadPost = (post: Post) => {
+  const handleCheckPostExistence = (post: Post) => {
     if (!post) {
       return;
     }
@@ -67,7 +67,7 @@ const Container: React.FC<Props> = (props: Props): React.ReactElement => {
       handleLinkKeyPress={handleLinkKeyPress}
       handleLinkSearchBtnClick={handleLinkSearchBtnClick}
       handleSearchPostRank={handleSearchPostRank}
-      handleOnloadPost={handleOnloadPost}
+      handleCheckPostExistence={handleCheckPostExistence}
       linkRef={linkRef}
     />
   );
