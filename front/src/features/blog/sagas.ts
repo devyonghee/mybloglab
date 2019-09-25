@@ -1,6 +1,6 @@
 import { Blog } from '@src/models/Blog';
 import axios, { AxiosResponse } from 'axios';
-import { delay, put, select, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
   BlogState,
   CheckPostExistenceAction,
@@ -16,7 +16,7 @@ const defaultSearchCount: number = 100;
 
 function* searchBlog(action: SearchBlogAction) {
   try {
-    const response: AxiosResponse = yield axios.get(`blog`, {
+    const response: AxiosResponse = yield call(axios.get, 'blog', {
       params: { url: action.payload },
     });
 
@@ -44,20 +44,23 @@ const fetchSearchPost = (blog: Blog | null, keyword: string): Promise<AxiosRespo
 };
 
 function* checkPostExistence(action: CheckPostExistenceAction) {
-  yield put(setPostProperty(action.payload.post, 'isExist', { loading: true }));
+  const blog: BlogState = yield select(store => store.blog);
+  if (!blog.blog || !blog.blog.posts.length) return;
+  const index = blog.blog.posts.findIndex(post => post === action.payload.post);
+
+  yield put(setPostProperty<'isExist'>(index, 'isExist', { loading: true, value: undefined }));
 
   try {
-    const blog: BlogState = yield select(store => store.blog);
-    const response = yield fetchSearchPost(blog.blog, action.payload.keyword);
+    const response = yield call(fetchSearchPost, blog.blog, action.payload.keyword);
     yield put(
-      setPostProperty(action.payload.post, 'isExist', {
+      setPostProperty<'isExist'>(index, 'isExist', {
         loading: false,
         value: response.status === 200 ? !!response.data : false,
       }),
     );
   } catch (error) {
     yield put(
-      setPostProperty(action.payload.post, 'isExist', {
+      setPostProperty<'isExist'>(index, 'isExist', {
         loading: false,
         value: false,
       }),
@@ -66,23 +69,25 @@ function* checkPostExistence(action: CheckPostExistenceAction) {
 }
 
 function* searchPostRank(action: SearchPostRankAction) {
-  yield put(setPostProperty(action.payload.post, 'rank', { loading: true }));
+  const blog: BlogState = yield select(store => store.blog);
+  if (!blog.blog || !blog.blog.posts.length) return;
+  const index = blog.blog.posts.findIndex(post => post === action.payload.post);
+
+  yield put(setPostProperty<'rank'>(index, 'rank', { loading: true }));
 
   try {
-    const blog: BlogState = yield select(store => store.blog);
     const response = yield fetchSearchPost(blog.blog, action.payload.keyword);
-    yield delay(3000);
     yield put(
-      setPostProperty(action.payload.post, 'rank', {
+      setPostProperty<'rank'>(index, 'rank', {
         loading: false,
         value: response.status === 200 ? Number(response.data) : Number(0),
       }),
     );
   } catch (error) {
     yield put(
-      setPostProperty(action.payload.post, 'rank', {
+      setPostProperty<'rank'>(index, 'rank', {
         loading: false,
-        value: false,
+        value: Number(0),
       }),
     );
   }

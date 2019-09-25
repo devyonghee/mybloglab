@@ -10,8 +10,8 @@ import {
 
 export interface SetBlogAction extends AppAction<typeof SET_BLOG, Blog> {}
 
-export interface SetPostPropertyAction
-  extends AppAction<typeof SET_POST_PROPERTY, { post: Post; id: keyof Post; value: any }> {}
+export interface SetPostPropertyAction<T extends keyof Post>
+  extends AppAction<typeof SET_POST_PROPERTY, { index: number; key: T; value: Post[T] }> {}
 
 export interface SearchBlogAction extends AppAction<typeof SEARCH_BLOG, string> {}
 
@@ -33,7 +33,7 @@ export enum SearchType {
 
 export type BlogActionTypes =
   | SetBlogAction
-  | SetPostPropertyAction
+  | SetPostPropertyAction<keyof Post>
   | SearchBlogAction
   | CheckPostExistenceAction
   | SearchPostRankAction;

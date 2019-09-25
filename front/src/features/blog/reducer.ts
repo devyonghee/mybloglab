@@ -1,3 +1,4 @@
+import { Post } from '@src/models/Blog';
 import { BlogActionTypes, BlogState, SetPostPropertyAction } from './types';
 import { SET_BLOG, SET_POST_PROPERTY } from './constants';
 
@@ -5,21 +6,21 @@ const initialState: BlogState = {
   blog: null,
 };
 
-const setPostProperty = (state: BlogState, action: SetPostPropertyAction) => {
+const setPostProperty = (state: BlogState, action: SetPostPropertyAction<keyof Post>) => {
   const { blog } = state;
   if (!blog) return state;
 
-  const findIndex = blog.posts.findIndex(post => post === action.payload.post);
-  if (!findIndex) return state;
+  const post = blog.posts[action.payload.index];
+  if (!post) return state;
 
   return {
     ...state,
     blog: {
       ...blog,
       posts: [
-        ...blog.posts.slice(0, findIndex),
-        { ...blog.posts[findIndex], [action.payload.id]: action.payload.value },
-        ...blog.posts.slice(findIndex + 1),
+        ...blog.posts.slice(0, action.payload.index),
+        { ...post, [action.payload.key]: action.payload.value },
+        ...blog.posts.slice(action.payload.index + 1),
       ],
     },
   };

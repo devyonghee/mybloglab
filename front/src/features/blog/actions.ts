@@ -10,9 +10,13 @@ import {
 
 const setBlog = (blog: Blog): BlogActionTypes => ({ type: SET_BLOG, payload: blog });
 
-const setPostProperty = (post: Post, id: keyof Post, value: any): BlogActionTypes => ({
+const setPostProperty = <T extends keyof Post>(
+  index: number,
+  key: T,
+  value: Post[T],
+): BlogActionTypes => ({
   type: SET_POST_PROPERTY,
-  payload: { post, id, value },
+  payload: { index, key, value },
 });
 
 const searchBlog = (link: string): BlogActionTypes => ({
