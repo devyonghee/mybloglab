@@ -1,22 +1,21 @@
 import React, { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
-import { Blog, Post } from '@src/models/Blog';
+import { BlogState, Post } from '@src/features/blog/types';
 import Presenter from './Presenter';
 
 interface Props {
-  blog: Blog | null;
+  blog: BlogState;
   searchBlog: (link: string) => void;
   searchPostRank: (post: Post, keyword: string) => void;
   checkPostExistence: (post: Post, keyword: string) => void;
 }
 
 const defaultProps = {
-  blog: null,
   searchBlog: () => console.warn('no function'),
   searchPostRank: () => console.warn('no function'),
 };
 
 const Container: React.FC<Props> = (props: Props): React.ReactElement => {
-  const [link, setLink] = useState('https://blog.naver.com/smileric');
+  const [link, setLink] = useState('');
   const linkRef = useRef<HTMLInputElement>(null);
 
   const { blog, searchBlog, checkPostExistence, searchPostRank } = props;
@@ -30,6 +29,7 @@ const Container: React.FC<Props> = (props: Props): React.ReactElement => {
     if (!link) {
       if (linkRef.current) linkRef.current.focus();
       alert('링크를 입력해주세요.');
+      return;
     }
     searchBlog(link);
   };

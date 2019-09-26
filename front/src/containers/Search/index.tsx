@@ -5,7 +5,7 @@ import * as blogActions from '@src/features/blog/actions';
 import Container from './Container';
 
 const mapStateToProps = (state: RootState) => ({
-  blog: state.blog.blog,
+  blog: state.blog,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {

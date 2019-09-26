@@ -2,7 +2,7 @@ import React, { RefObject } from 'react';
 import Layout from '@src/layouts/base/Layout';
 import MyTextField from '@src/components/TextField';
 import PostList from '@src/components/PostList';
-import { Blog, Post } from '@src/models/Blog';
+import { BlogState, Post } from '@src/features/blog/types';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Avatar from '@material-ui/core/Avatar';
@@ -11,7 +11,7 @@ import Link from '@material-ui/core/Link';
 import useStyles from './style';
 
 interface Props {
-  blog: Blog | null;
+  blog: BlogState;
   link?: string;
   handleLinkChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleLinkKeyPress: (event: React.KeyboardEvent<HTMLInputElement>) => void;

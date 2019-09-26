@@ -7,7 +7,7 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Post } from '@src/models/Blog';
+import { Post } from '@src/features/blog/types';
 import PostRow from './PostRow';
 import TablePaginationActions from './TablePagenationActions';
 

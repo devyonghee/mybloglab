@@ -20,7 +20,7 @@ const Navigation: React.FC = (): React.ReactElement => {
   const classes = useStyles();
   return (
     <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-      {Object.entries(sections).map(([name, href]) => (
+      {Object.values(sections).map(({ href, name }) => (
         <Link
           color="inherit"
           noWrap
@@ -30,7 +30,7 @@ const Navigation: React.FC = (): React.ReactElement => {
           className={classes.toolbarLink}
           component={RouterLink}
         >
-          {name.toLowerCase()}
+          {name}
         </Link>
       ))}
     </Toolbar>

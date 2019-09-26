@@ -3,6 +3,11 @@ declare interface Window {
   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
 }
 
+declare module 'routes.json' {
+  const value: { name: string; href: string };
+  export default value;
+}
+
 declare interface NodeModule {
   hot?: { accept: (path: string, callback: () => void) => void };
 }

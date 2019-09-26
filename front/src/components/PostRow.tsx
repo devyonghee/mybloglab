@@ -2,7 +2,7 @@ import React from 'react';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import { Post } from '@src/models/Blog';
+import { Post } from '@src/features/blog/types';
 import Link from '@material-ui/core/Link';
 import SearchTextFiled from '@src/components/SearchTextFiled';
 import { makeStyles } from '@material-ui/core';

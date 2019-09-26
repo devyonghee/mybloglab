@@ -1,5 +1,5 @@
-import { Blog, Post } from '@src/models/Blog';
 import { AppAction } from '@src/features/root-actions';
+import { Moment } from 'moment';
 import {
   CHECK_POST_EXISTENCE,
   SEARCH_BLOG,
@@ -8,7 +8,27 @@ import {
   SET_POST_PROPERTY,
 } from './constants';
 
-export interface SetBlogAction extends AppAction<typeof SET_BLOG, Blog> {}
+export type RemoteProps<T> = {
+  loading: Boolean;
+  value?: T;
+};
+
+export type BlogState = {
+  title: string;
+  link?: URL;
+  image?: URL;
+  posts: Array<Post>;
+};
+
+export type Post = {
+  title: string;
+  rank: RemoteProps<Number>;
+  isExist: RemoteProps<Boolean>;
+  link?: URL;
+  created?: Moment;
+};
+
+export interface SetBlogAction extends AppAction<typeof SET_BLOG, BlogState> {}
 
 export interface SetPostPropertyAction<T extends keyof Post>
   extends AppAction<typeof SET_POST_PROPERTY, { index: number; key: T; value: Post[T] }> {}
@@ -37,7 +57,3 @@ export type BlogActionTypes =
   | SearchBlogAction
   | CheckPostExistenceAction
   | SearchPostRankAction;
-
-export type BlogState = {
-  blog: Blog | null;
-};

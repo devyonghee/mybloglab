@@ -1,4 +1,10 @@
 {
-  "HOME": "/",
-  "SEARCH" : "/search"
+  "HOME": {
+    "href": "/",
+    "name": "홈"
+  },
+  "SEARCH": {
+    "href": "/search",
+    "name": "블로그 검색"
+  }
 }

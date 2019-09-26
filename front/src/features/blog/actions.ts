@@ -1,5 +1,5 @@
-import { Blog, Post } from '@src/models/Blog';
-import { BlogActionTypes } from '@src/features/blog/types';
+import { BlogActionTypes, BlogState } from '@src/features/blog/types';
+import { Post } from './types';
 import {
   CHECK_POST_EXISTENCE,
   SEARCH_BLOG,
@@ -8,7 +8,7 @@ import {
   SET_POST_PROPERTY,
 } from './constants';
 
-const setBlog = (blog: Blog): BlogActionTypes => ({ type: SET_BLOG, payload: blog });
+const setBlog = (blog: BlogState): BlogActionTypes => ({ type: SET_BLOG, payload: blog });
 
 const setPostProperty = <T extends keyof Post>(
   index: number,

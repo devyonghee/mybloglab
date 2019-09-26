@@ -10,8 +10,8 @@ const router: React.FC = (): React.ReactElement => (
   <Router history={history}>
     <ScrollToTop>
       <Switch>
-        <Route exact path={routes.HOME} component={Home} />
-        <Route exact path={routes.SEARCH} component={Search} />
+        <Route exact path={routes.HOME.href} component={Home} />
+        <Route exact path={routes.SEARCH.href} component={Search} />
         {/* <Route exact path='/dashboard' component={Dashboard}/> */}
         {/* <Route exact path='/signup' component={Signup}/> */}
         {/* <Route exact path='/wizard' component={Wizard}/> */}
