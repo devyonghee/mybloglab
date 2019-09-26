@@ -1,4 +1,4 @@
-package com.mybloglab.blog.dto;
+package com.mybloglab.blog.application.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

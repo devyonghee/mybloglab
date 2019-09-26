@@ -1,5 +1,6 @@
-package com.mybloglab.blog;
+package com.mybloglab.blog.ui;
 
+import com.mybloglab.blog.application.model.BlogDto;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
@@ -19,7 +20,7 @@ import java.util.Optional;
 public class BlogController {
 
     @GetMapping
-    public ResponseEntity<Blog> search(String url) throws URISyntaxException, IOException {
+    public ResponseEntity<BlogDto> search(String url) throws URISyntaxException, IOException {
         Optional<String> scheme = Optional.ofNullable(new URI(url).getScheme());
         if (!scheme.isPresent()) url = "http://" + url;
         Document blogDocument = Jsoup.connect(url).get();
@@ -28,7 +29,7 @@ public class BlogController {
 
         Document rssDocument = Jsoup.connect(rssHref).get();
         Document document = Jsoup.parse(rssDocument.html(), "", Parser.xmlParser());
-        Blog blog = Blog.of(document);
+        BlogDto blog = BlogDto.of(document);
         return new ResponseEntity<>(blog, HttpStatus.OK);
     }
 }

@@ -1,6 +1,8 @@
-package com.mybloglab.blog;
+package com.mybloglab.blog.ui;
 
-import com.mybloglab.blog.dto.NaverSearchDto;
+import com.mybloglab.blog.application.model.NaverSearchDto;
+import com.mybloglab.blog.application.model.NaverSort;
+import com.mybloglab.blog.application.rest.NaverFeignClients;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

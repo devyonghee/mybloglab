@@ -1,8 +1,9 @@
-package com.mybloglab.blog;
+package com.mybloglab.blog.application.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import org.jsoup.nodes.Element;
 
 import java.time.LocalDateTime;
@@ -11,7 +12,7 @@ import java.util.Optional;
 
 @Builder
 @Getter
-public class Post {
+public class PostDto {
     private String title;
     private String link;
 
@@ -21,8 +22,8 @@ public class Post {
     )
     private LocalDateTime created;
 
-    public static Post of(Element itemElement) {
-        PostBuilder postBuilder = builder();
+    public static PostDto of(Element itemElement) {
+        PostDtoBuilder postBuilder = builder();
         tagElement(itemElement, "title").ifPresent(element -> postBuilder.title(element.text()));
         tagElement(itemElement, "link").ifPresent(element -> postBuilder.link(element.text()));
         tagElement(itemElement, "pubDate").ifPresent(element ->

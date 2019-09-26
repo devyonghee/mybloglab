@@ -1,4 +1,4 @@
-package com.mybloglab.blog.dto;
+package com.mybloglab.blog.application.model;
 
 import lombok.Getter;
 
@@ -9,12 +9,6 @@ import java.util.Optional;
 
 @Getter
 public class NaverSearchDto {
-//    @JsonFormat(
-//            shape = JsonFormat.Shape.STRING,
-//            pattern = "EEE, dd MMM yyyy HH:mm:ss Z"
-//    )
-//    private LocalDateTime lastBuildDate;
-
     private Integer total;
     private Integer start;
     private Integer display;

@@ -1,7 +1,8 @@
-package com.mybloglab.blog;
+package com.mybloglab.blog.application.model;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
@@ -10,23 +11,23 @@ import java.util.stream.Collectors;
 
 @Builder
 @Getter
-public class Blog {
+public class BlogDto {
     private String title;
     private String image;
     private String link;
-    private Set<Post> posts = new HashSet<>();
+    private Set<PostDto> posts = new HashSet<>();
 
-    public static Blog of(Document document) {
+    public static BlogDto of(Document document) {
         Element channel = document.selectFirst("channel");
         String image_url = channel.selectFirst("image url").text();
         String link = channel.selectFirst("link").text();
-        Set<Post> posts = channel
+        Set<PostDto> posts = channel
                 .select("item")
                 .stream()
-                .map(Post::of)
+                .map(PostDto::of)
                 .collect(Collectors.toSet());
 
-        return Blog
+        return BlogDto
                 .builder()
                 .title(document.title())
                 .image(image_url)

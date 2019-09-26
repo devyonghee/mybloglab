@@ -1,11 +1,12 @@
 server:
   port: 8080
 
+spring:
+  application:
+    name: mybloglab
+
 naver-api:
   url: https://openapi.naver.com/v1/
-  id: wimMMqND6IS9z3VIzppq
-  key: l7B0yLlyEy
-
 
 hystrix:
   command:
@@ -24,7 +25,4 @@ feign:
 
 logging:
   level:
-    com:
-      mybloglab:
-        blog:
-          NaverFeignClients: DEBUG
+    root: WARN
