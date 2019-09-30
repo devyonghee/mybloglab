@@ -5,8 +5,9 @@ spring:
   application:
     name: mybloglab
 
-naver-api:
-  url: https://openapi.naver.com/v1/
+naver:
+  common.url: https://openapi.naver.com/v1/
+  ads.url: https://api.naver.com/
 
 hystrix:
   command:

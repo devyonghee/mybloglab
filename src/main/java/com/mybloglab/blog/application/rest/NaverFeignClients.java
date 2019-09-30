@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "naver-api",
-        url = "${naver-api.url}",
+@FeignClient(name = "naver.common.api",
+        url = "${naver.common.url}",
         configuration = NaverFeignClients.NaverFeignConfiguration.class
 )
 public interface NaverFeignClients {
@@ -23,7 +23,10 @@ public interface NaverFeignClients {
 
     class NaverFeignConfiguration extends FeignConfiguration {
         @Bean
-        public RequestInterceptor requestKeyBearerInterceptor(@Value("${naver-api.id}") String naverId, @Value("${naver-api.key}") String naverkey) {
+        public RequestInterceptor requestKeyBearerInterceptor(
+                @Value("${naver.common.id}") String naverId,
+                @Value("${naver.common.key}") String naverkey
+        ) {
             return template -> template.header("X-Naver-Client-Id", naverId)
                     .header("X-Naver-Client-Secret", naverkey)
                     .request();
