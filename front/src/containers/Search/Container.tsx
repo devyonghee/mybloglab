@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
+import React from 'react';
 import { BlogState, Post } from '@src/features/blog/types';
 import Presenter from './Presenter';
 
@@ -15,33 +15,13 @@ const defaultProps = {
 };
 
 const Container: React.FC<Props> = (props: Props): React.ReactElement => {
-  const [link, setLink] = useState('');
-  const linkRef = useRef<HTMLInputElement>(null);
-
   const { blog, searchBlog, checkPostExistence, searchPostRank } = props;
 
-  const handleLinkChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    event.preventDefault();
-    setLink(event.currentTarget.value);
-  };
-
-  const searchBlogLink = () => {
+  const handleSearchBlog = (link: string) => {
     if (!link) {
-      if (linkRef.current) linkRef.current.focus();
-      alert('링크를 입력해주세요.');
-      return;
+      alert('주소를 입력해주세요.');
     }
     searchBlog(link);
-  };
-
-  const handleLinkKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key.toLowerCase() !== 'enter') return;
-    searchBlogLink();
-  };
-
-  const handleLinkSearchBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    searchBlogLink();
   };
 
   const handleSearchPostRank = (post: Post, keyword: string) => {
@@ -62,13 +42,9 @@ const Container: React.FC<Props> = (props: Props): React.ReactElement => {
   return (
     <Presenter
       blog={blog}
-      link={link}
-      handleLinkChange={handleLinkChange}
-      handleLinkKeyPress={handleLinkKeyPress}
-      handleLinkSearchBtnClick={handleLinkSearchBtnClick}
+      handleSearchBlog={handleSearchBlog}
       handleSearchPostRank={handleSearchPostRank}
       handleCheckPostExistence={handleCheckPostExistence}
-      linkRef={linkRef}
     />
   );
 };

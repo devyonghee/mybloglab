@@ -1,58 +1,50 @@
-import React, { RefObject } from 'react';
+import React from 'react';
 import Layout from '@src/layouts/base/Layout';
-import MyTextField from '@src/components/TextField';
 import PostList from '@src/components/PostList';
 import { BlogState, Post } from '@src/features/blog/types';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
 import Avatar from '@material-ui/core/Avatar';
 import { Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
+import { withStyles } from '@material-ui/styles';
+import SearchTextFiled from '@src/components/SearchTextFiled';
 import useStyles from './style';
 
 interface Props {
   blog: BlogState;
-  link?: string;
-  handleLinkChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleLinkKeyPress: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-  handleLinkSearchBtnClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  handleSearchBlog: (link: string) => void;
   handleSearchPostRank: (post: Post, keyword: string) => void;
   handleCheckPostExistence: (post: Post) => void;
-  linkRef: RefObject<HTMLInputElement>;
 }
+
+const BlogSearchFiled = withStyles(theme => ({
+  textField: {
+    display: 'inline-flex',
+    marginTop: theme.spacing(5),
+    width: '60vw',
+    maxWidth: '400px',
+  },
+
+  button: {
+    transform: 'translateY(39px)',
+    borderRadius: '10%',
+    height: '57px',
+    width: '57px',
+  },
+}))(SearchTextFiled);
 
 const Presenter: React.FC<Props> = (props: Props): React.ReactElement => {
   const classes = useStyles();
-  const {
-    blog,
-    link,
-    linkRef,
-    handleLinkChange,
-    handleLinkKeyPress,
-    handleLinkSearchBtnClick,
-    handleSearchPostRank,
-    handleCheckPostExistence,
-  } = props;
+  const { blog, handleSearchBlog, handleSearchPostRank, handleCheckPostExistence } = props;
   return (
     <Layout>
-      <MyTextField
+      <BlogSearchFiled
+        onSearch={handleSearchBlog}
         required
-        className={classes.linkTextField}
-        onChange={handleLinkChange}
-        inputProps={{
-          onKeyPress: handleLinkKeyPress,
-        }}
-        value={link || ''}
-        id="keyword"
         label="블로그 사이트"
         variant="outlined"
         autoFocus
         margin="normal"
-        inputRef={linkRef}
       />
-      <IconButton onClick={handleLinkSearchBtnClick} className={classes.searchButton}>
-        <SearchIcon />
-      </IconButton>
       {blog && (
         <div className={classes.blog}>
           {blog.image && (

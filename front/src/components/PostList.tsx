@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -40,9 +40,9 @@ const useStyles = makeStyles(theme => ({
 
 const PostList: React.FC<Props> = (props: Props) => {
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const rowsPerPageOptions = [5, 10, 20, 50];
-  const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[0]);
+  const [page, setPage] = useState<number>(0);
+  const rowsPerPageOptions: Array<number> = [5, 10, 20, 50];
+  const [rowsPerPage, setRowsPerPage] = useState<number>(rowsPerPageOptions[0]);
   const { posts, blogger, handleSearchPostRank, handleCheckExistence } = props;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, posts.length - page * rowsPerPage);

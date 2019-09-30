@@ -9,7 +9,6 @@ const useStyles = makeStyles(theme => ({
   },
 
   searchButton: {
-    position: 'absolute',
     transform: 'translateY(39px)',
     borderRadius: '10%',
     height: '57px',

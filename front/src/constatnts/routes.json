@@ -3,6 +3,10 @@
     "href": "/",
     "name": "홈"
   },
+  "KEYWORD": {
+    "href": "/keyword",
+    "name": "키워드"
+  },
   "SEARCH": {
     "href": "/search",
     "name": "블로그 검색"
