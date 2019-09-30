@@ -7,8 +7,8 @@
     "href": "/keyword",
     "name": "키워드"
   },
-  "SEARCH": {
-    "href": "/search",
+  "BLOG": {
+    "href": "/Blog",
     "name": "블로그 검색"
   }
 }

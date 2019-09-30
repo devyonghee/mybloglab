@@ -4,7 +4,7 @@ import ScrollToTop from './utils/ScrollTop';
 import routes from './constatnts/routes.json';
 import { history } from './store/configure';
 import Home from './containers/Home';
-import Search from './containers/Search';
+import BLOG from './containers/Blog';
 import Keyword from './containers/Keyword';
 
 const router: React.FC = (): React.ReactElement => (
@@ -13,7 +13,7 @@ const router: React.FC = (): React.ReactElement => (
       <Switch>
         <Route exact path={routes.HOME.href} component={Home} />
         <Route exact path={routes.KEYWORD.href} component={Keyword} />
-        <Route exact path={routes.SEARCH.href} component={Search} />
+        <Route exact path={routes.BLOG.href} component={BLOG} />
       </Switch>
     </ScrollToTop>
   </Router>
