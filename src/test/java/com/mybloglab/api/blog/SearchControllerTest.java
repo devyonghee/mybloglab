@@ -1,4 +1,4 @@
-package com.mybloglab.blog;
+package com.mybloglab.api.blog;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

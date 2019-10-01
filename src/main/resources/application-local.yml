@@ -4,4 +4,3 @@ server:
 logging:
   level:
     root: DEBUG
-    com.mybloglab.blog.application.rest.NaverFeignClients: DEBUG

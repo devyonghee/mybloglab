@@ -1,6 +1,6 @@
-package com.mybloglab.blog.ui;
+package com.mybloglab.api.blog.ui;
 
-import com.mybloglab.blog.application.model.BlogDto;
+import com.mybloglab.api.blog.application.model.BlogDto;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
@@ -30,6 +30,6 @@ public class BlogController {
         Document rssDocument = Jsoup.connect(rssHref).get();
         Document document = Jsoup.parse(rssDocument.html(), "", Parser.xmlParser());
         BlogDto blog = BlogDto.of(document);
-        return new ResponseEntity<>(blog, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(blog);
     }
 }

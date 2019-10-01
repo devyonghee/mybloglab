@@ -1,7 +1,7 @@
-package com.mybloglab.blog.application.rest;
+package com.mybloglab.api.blog.application.rest;
 
-import com.mybloglab.blog.application.model.NaverSearchDto;
-import com.mybloglab.common.config.FeignConfiguration;
+import com.mybloglab.api.blog.application.model.NaverSearchDto;
+import com.mybloglab.api.common.config.FeignConfiguration;
 import feign.RequestInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -23,7 +23,7 @@ public interface NaverFeignClients {
 
     class NaverFeignConfiguration extends FeignConfiguration {
         @Bean
-        public RequestInterceptor requestKeyBearerInterceptor(
+        public RequestInterceptor requestInterceptor(
                 @Value("${naver.common.id}") String naverId,
                 @Value("${naver.common.key}") String naverkey
         ) {

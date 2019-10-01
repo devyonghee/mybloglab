@@ -1,4 +1,4 @@
-package com.mybloglab.common.config;
+package com.mybloglab.api.common.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

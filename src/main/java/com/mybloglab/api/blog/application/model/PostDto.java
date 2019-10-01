@@ -1,9 +1,8 @@
-package com.mybloglab.blog.application.model;
+package com.mybloglab.api.blog.application.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import org.jsoup.nodes.Element;
 
 import java.time.LocalDateTime;

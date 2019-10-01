@@ -1,8 +1,7 @@
-package com.mybloglab.blog.application.model;
+package com.mybloglab.api.blog.application.model;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 

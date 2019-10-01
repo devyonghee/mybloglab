@@ -1,4 +1,4 @@
-package com.mybloglab.blog.application.model;
+package com.mybloglab.api.blog.application.model;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
