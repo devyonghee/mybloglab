@@ -3,12 +3,10 @@ package com.mybloglab.api.keyword.application.rest;
 import com.mybloglab.api.common.config.FeignConfiguration;
 import com.mybloglab.api.common.util.Signatures;
 import com.mybloglab.api.keyword.application.model.KeywordListDto;
-import feign.Logger;
 import feign.RequestInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,14 +19,9 @@ import java.security.SignatureException;
 public interface NaverAdsFeignClients {
 
     @GetMapping("/keywordstool?showDetail=1")
-    String searchKeyword(@RequestParam("hintKeywords") String keyword);
+    KeywordListDto searchKeyword(@RequestParam("hintKeywords") String keyword);
 
     class NaverAdsFeignConfiguration extends FeignConfiguration {
-
-        @Bean
-        Logger.Level feignLoggerLevel() {
-            return Logger.Level.FULL;
-        }
 
         @Bean
         public RequestInterceptor requestInterceptor(

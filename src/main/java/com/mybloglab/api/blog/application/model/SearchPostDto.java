@@ -1,6 +1,6 @@
 package com.mybloglab.api.blog.application.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.Getter;
 
 import java.net.URI;
@@ -12,13 +12,13 @@ public class SearchPostDto {
     private String link;
     private String description;
 
-    @JsonProperty("bloggername")
+    @JsonSetter("bloggername")
     private String bloggerName;
 
-    @JsonProperty("bloggerlink")
+    @JsonSetter("bloggerlink")
     private String bloggerLink;
 
-    @JsonProperty("postdate")
+    @JsonSetter("postdate")
     private LocalDate postDate;
 
     public boolean isEqualToLink(URI url) {

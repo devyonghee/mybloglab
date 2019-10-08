@@ -1,4 +1,4 @@
-package com.mybloglab.api.blog.ui;
+package com.mybloglab.api.blog.controllers;
 
 import com.mybloglab.api.blog.application.model.BlogDto;
 import org.jsoup.Jsoup;
