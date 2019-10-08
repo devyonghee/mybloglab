@@ -20,13 +20,13 @@ export type BlogState = {
   posts: Array<Post>;
 };
 
-export type Post = {
+export interface Post {
   title: string;
   rank: RemoteProps<Number>;
   isExist: RemoteProps<Boolean>;
   link?: URL;
   created?: Moment;
-};
+}
 
 export interface SetBlogAction extends AppAction<typeof SET_BLOG, BlogState> {}
 

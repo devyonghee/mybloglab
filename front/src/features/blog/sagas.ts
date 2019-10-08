@@ -21,7 +21,7 @@ function* searchBlog(action: SearchBlogAction) {
       params: { url: action.payload },
     });
 
-    if (response.statusText !== 'OK') {
+    if (response.status !== 200) {
       alert('요청에 실패했습니다.');
       return;
     }

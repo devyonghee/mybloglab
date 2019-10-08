@@ -8,19 +8,22 @@ const initialState: BlogState = {
   posts: [] as Array<Post>,
 };
 
-const setPostProperty = (state: BlogState, action: SetPostPropertyAction<keyof Post>) => {
+const setPostProperty = (
+  state: BlogState,
+  action: SetPostPropertyAction<keyof Post>['payload'],
+) => {
   const { posts } = state;
   if (!posts) return state;
 
-  const post = posts[action.payload.index];
+  const post = posts[action.index];
   if (!post) return state;
 
   return {
     ...state,
     posts: [
-      ...posts.slice(0, action.payload.index),
-      { ...post, [action.payload.key]: action.payload.value },
-      ...posts.slice(action.payload.index + 1),
+      ...posts.slice(0, action.index),
+      { ...post, [action.key]: action.value },
+      ...posts.slice(action.index + 1),
     ],
   };
 };
@@ -34,7 +37,7 @@ const blogReducer = (state: BlogState = initialState, action: BlogActionTypes): 
       };
 
     case SET_POST_PROPERTY:
-      return setPostProperty(state, action);
+      return setPostProperty(state, action.payload);
 
     default:
       return state;
